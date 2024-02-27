@@ -33,7 +33,7 @@ namespace server.Services
 
             Response<ChatCompletions> response = await _openAIClient.GetChatCompletionsAsync(chatCompletionsOptions);
             ChatResponseMessage responseMessage = response.Value.Choices[0].Message;
-            return $"[{responseMessage.Role.ToString().ToUpperInvariant()}]: {responseMessage.Content}";
+            return(responseMessage.Content);
         }
     }
 }
