@@ -1,6 +1,11 @@
+using server.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+//scopes
+builder.Services.AddScoped<ApiService>(_ => new ApiService("your key"));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
