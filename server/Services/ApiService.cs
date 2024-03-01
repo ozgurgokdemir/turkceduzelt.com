@@ -16,6 +16,31 @@ namespace server.Services
             _openAIClient = new OpenAIClient(apiKey);
         }
 
+        readonly string systemMessage =
+    @" 
+    Sen türk dil kurumunda çalışan bir asistansın ve iki görevin var. 
+
+    İlk görevin cümledeki büyük küçük harf ve yazım hatalarını düzeltmek.
+   
+    İkinci görevin düzelttiğin cümle ve verilen cümle arasındaki farkları JSON verisine dönüştürmek. Doğru yazılmış olan kelimeleri dahil etme. Sadece yanlış olan kelimeler JSON verisi içinde dahil olsun. Kelimenin ilk harfinin büyük veya küçük olup olmayacağına dikkat et.
+
+    Örnek:
+
+    {
+        ""kelimeler"": [
+            {
+                ""doğru"": ""kelimenin doğrusu"",
+                ""yanlış"": ""kelimenin yanlışı""
+            },
+            {
+                ""doğru"": ""kelimenin doğrusu"",
+                ""yanlış"": ""kelimenin yanlışı""
+            }
+        ]
+    }
+";
+
+
         public async Task<string> SendApiMessage(string prompt)
         {
 
@@ -24,7 +49,7 @@ namespace server.Services
                 DeploymentName = "gpt-3.5-turbo-0125",
                 Messages =
                       {
-                        new ChatRequestSystemMessage("Sen türk dil kurumunda çalışan bir asistansın ve görevin cümledeki yanlış kelimeleri düzeltmek."),
+                        new ChatRequestSystemMessage(systemMessage),
 
                         new ChatRequestUserMessage(prompt),
 
