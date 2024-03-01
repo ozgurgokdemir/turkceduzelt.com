@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "liGQWN5R9ejNCDTj4oJzh8UHIAwnmYbm35a1SbN79hWz/5W+6WcvIKDYwbyUURLIcKP8LWNALj+xlHH1YjW7IA==",
+  "dgSpecHash": "7EA79AYC7WXSgCUC6REHQ/C/C97GhzdPcenoAfa+evBDfjnLSAYaA0n/aGAMh8Xb9A8hmB1BCDxot5PXd4DwlQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\ufuk\\source\\repos\\turkceduzelt.com\\server\\server.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\ufuk\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\ufuk\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\ufuk\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\ufuk\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\ufuk\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\ufuk\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "C:\\Users\\ufuk\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using server.Services;
 
 namespace server.Controllers
@@ -15,6 +16,12 @@ namespace server.Controllers
             _apiService = apiService;
         }
 
+        public class WordPair
+        {
+            public string? doğru { get; set; }
+            public string? yanlış { get; set; }
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] string prompt)
         {
@@ -24,7 +31,25 @@ namespace server.Controllers
             }
 
             string response = await _apiService.SendApiMessage(prompt);
-            return Ok(response);
+
+            
+            try
+            {
+                // JSON verisini C# nesnesine dönüştürme
+                var data = JsonConvert.DeserializeObject<Dictionary<string, List<WordPair>>>(
+                    response
+                );
+                // C# nesnesini JSON verisine döndürme
+                var jsonData = JsonConvert.SerializeObject(data);
+
+                return Ok(jsonData);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
+            
         }
     }
 }
