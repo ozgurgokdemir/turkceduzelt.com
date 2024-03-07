@@ -11,10 +11,15 @@
     "prepare": "cd .. && husky client/.husky"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.0.2",
+    "class-variance-authority": "^0.7.0",
+    "lucide-react": "^0.350.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@types/node": "^20.11.25",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
