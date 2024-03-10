@@ -1,3 +1,5 @@
+import defaultTheme from 'tailwindcss/defaultTheme';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ['class'],
@@ -75,6 +77,39 @@ export default {
         primary: 'hsl(var(--color-bg))',
         surface: 'hsl(var(--color-bg-surface))',
       },
+    },
+    fontFamily: {
+      sans: ['var(--font-family-sans)', ...defaultTheme.fontFamily.sans],
+    },
+    fontWeight: {
+      regular: 'var(--font-weight-regular)',
+      medium: 'var(--font-weight-medium)',
+      semibold: 'var(--font-weight-semibold)',
+    },
+    fontSize: {
+      xs: 'var(--font-size-xs)',
+      sm: 'var(--font-size-sm)',
+      base: 'var(--font-size-base)',
+      lg: 'var(--font-size-lg)',
+      xl: 'var(--font-size-xl)',
+      '2xl': 'var(--font-size-2xl)',
+      '3xl': 'var(--font-size-3xl)',
+      '4xl': 'var(--font-size-4xl)',
+      '5xl': 'var(--font-size-5xl)',
+    },
+    lineHeight: {
+      4: 'var(--font-line-height-4)',
+      5: 'var(--font-line-height-5)',
+      6: 'var(--font-line-height-6)',
+      7: 'var(--font-line-height-7)',
+      8: 'var(--font-line-height-8)',
+      9: 'var(--font-line-height-9)',
+      10: 'var(--font-line-height-10)',
+      none: 'var(--font-line-height-none)',
+    },
+    letterSpacing: {
+      dense: 'var(--font-letter-spacing-dense)',
+      normal: 'var(--font-letter-spacing-normal)',
     },
     container: {
       center: true,
