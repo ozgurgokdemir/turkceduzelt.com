@@ -4,73 +4,54 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    --color-bg: 0deg 0% 100%;
+    --color-bg-surface: 0deg 0% 100%;
+    --color-bg-surface-hover: 0deg 0% 98%;
+    --color-bg-surface-active: 240deg 5% 96%;
+    --color-bg-surface-brand: 158deg 64% 52%;
+    --color-bg-surface-success: 142deg 77% 73%;
+    --color-bg-surface-critical: 0deg 94% 82%;
+    --color-bg-fill: 240deg 5% 96%;
+    --color-bg-fill-hover: 0deg 0% 98%;
+    --color-bg-fill-brand: 158deg 64% 52%;
+    --color-bg-fill-brand-hover: 160deg 84% 39%;
+    --color-bg-fill-success: 142deg 71% 45%;
+    --color-bg-fill-success-hover: 142deg 76% 36%;
+    --color-bg-fill-critical: 0deg 84% 60%;
+    --color-bg-fill-critical-hover: 0deg 72% 51%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --color-text: 240deg 10% 4%;
+    --color-text-secondary: 240deg 5% 26%;
+    --color-text-muted: 240deg 5% 65%;
+    --color-text-link: 217deg 91% 60%;
+    --color-text-link-hover: 213deg 94% 68%;
+    --color-text-brand: 160deg 84% 39%;
+    --color-text-brand-hover: 158deg 64% 52%;
+    --color-text-brand-on-bg-fill: 0deg 0% 100%;
+    --color-text-success: 142deg 71% 45%;
+    --color-text-success-hover: 142deg 69% 58%;
+    --color-text-success-on-bg-fill: 0deg 0% 100%;
+    --color-text-critical: 0deg 63% 31%;
+    --color-text-critical-hover: 0deg 91% 71%;
+    --color-text-critical-on-bg-fill: 0deg 0% 100%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --color-border: 240deg 6% 90%;
+    --color-border-hover: 240deg 5% 84%;
+    --color-border-secondary: 240deg 5% 96%;
+    --color-border-focus: 213deg 94% 68%;
+    --color-border-brand: 158deg 64% 52%;
+    --color-border-success: 142deg 69% 58%;
+    --color-border-critical: 0deg 91% 71%;
 
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
-
-    --radius: 0.5rem;
+    --color-icon: 240deg 5% 26%;
+    --color-icon-secondary: 240deg 4% 46%;
+    --color-icon-muted: 240deg 5% 65%;
+    --color-icon-brand: 160deg 84% 39%;
+    --color-icon-success: 142deg 71% 45%;
+    --color-icon-critical: 0deg 84% 60%;
   }
 
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-primary text-primary;
   }
 }

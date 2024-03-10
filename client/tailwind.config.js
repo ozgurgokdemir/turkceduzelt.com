@@ -2,51 +2,88 @@
 export default {
   darkMode: ['class'],
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
-  prefix: '',
   theme: {
+    backgroundColor: {
+      primary: 'hsl(var(--color-bg))',
+      surface: {
+        DEFAULT: 'hsl(var(--color-bg-surface))',
+        hover: 'hsl(var(--color-bg-surface-hover))',
+        active: 'hsl(var(--color-bg-surface-active))',
+        brand: 'hsl(var(--color-bg-surface-brand))',
+        success: 'hsl(var(--color-bg-surface-success))',
+        critical: 'hsl(var(--color-bg-surface-critical))',
+      },
+      fill: {
+        DEFAULT: 'hsl(var(--color-bg-fill))',
+        hover: 'hsl(var(--color-bg-fill-hover))',
+        active: {
+          DEFAULT: 'hsl(var(--color-bg-fill-active))',
+          hover: 'hsl(var(--color-bg-fill-active-hover))',
+        },
+        brand: {
+          DEFAULT: 'hsl(var(--color-bg-fill-brand))',
+          hover: 'hsl(var(--color-bg-fill-brand-hover))',
+        },
+        success: {
+          DEFAULT: 'hsl(var(--color-bg-fill-success))',
+          hover: 'hsl(var(--color-bg-fill-success-hover))',
+        },
+        critical: {
+          DEFAULT: 'hsl(var(--color-bg-fill-critical))',
+          hover: 'hsl(var(--color-bg-fill-critical-hover))',
+        },
+      },
+    },
+    textColor: {
+      primary: 'hsl(var(--color-text))',
+      secondary: 'hsl(var(--color-text-secondary))',
+      muted: 'hsl(var(--color-text-muted))',
+      link: {
+        DEFAULT: 'hsl(var(--color-text-link))',
+        hover: 'hsl(var(--color-text-link-hover))',
+      },
+      brand: {
+        DEFAULT: 'hsl(var(--color-text-brand))',
+        hover: 'hsl(var(--color-text-brand-hover))',
+        'on-bg-fill': 'hsl(var(--color-text-brand-on-bg-fill))',
+      },
+      success: {
+        DEFAULT: 'hsl(var(--color-text-success))',
+        hover: 'hsl(var(--color-text-success-hover))',
+        'on-bg-fill': 'hsl(var(--color-text-success-on-bg-fill))',
+      },
+      critical: {
+        DEFAULT: 'hsl(var(--color-text-critical))',
+        hover: 'hsl(var(--color-text-critical-hover))',
+        'on-bg-fill': 'hsl(var(--color-text-critical-on-bg-fill))',
+      },
+    },
+    borderColor: {
+      primary: 'hsl(var(--color-border))',
+      hover: 'hsl(var(--color-border-hover))',
+      secondary: 'hsl(var(--color-border-secondary))',
+      focus: 'hsl(var(--color-border-focus))',
+      brand: 'hsl(var(--color-border-brand))',
+      success: 'hsl(var(--color-border-success))',
+      critical: 'hsl(var(--color-border-critical))',
+    },
+    ringColor: {
+      focus: 'hsl(var(--color-border-focus))',
+    },
+    ringOffsetColor: {
+      bg: {
+        primary: 'hsl(var(--color-bg))',
+        surface: 'hsl(var(--color-bg-surface))',
+      },
+    },
     container: {
       center: true,
-      padding: '2rem',
-      screens: {
-        '2xl': '1400px',
+      padding: {
+        DEFAULT: '1.5rem',
+        lg: '2rem',
       },
     },
     extend: {
-      colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
-        },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
-        },
-      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
@@ -68,5 +105,29 @@ export default {
       },
     },
   },
-  plugins: ['tailwindcss-animate'],
+  plugins: [
+    ({ addUtilities }) => {
+      addUtilities({
+        '.icon-primary': {
+          color: 'hsl(var(--color-icon))',
+        },
+        '.icon-secondary': {
+          color: 'hsl(var(--color-icon-secondary))',
+        },
+        '.icon-muted': {
+          color: 'hsl(var(--color-icon-muted))',
+        },
+        '.icon-brand': {
+          color: 'hsl(var(--color-icon-brand))',
+        },
+        '.icon-success': {
+          color: 'hsl(var(--color-icon-success))',
+        },
+        '.icon-critical': {
+          color: 'hsl(var(--color-icon-critical))',
+        },
+      });
+    },
+    'tailwindcss-animate',
+  ],
 };
