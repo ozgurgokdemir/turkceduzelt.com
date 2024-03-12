@@ -26,6 +26,9 @@ module.exports = {
         'plugin:storybook/recommended',
         'prettier',
       ],
+      rules: {
+        '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      },
     },
     {
       files: ['*.mjs', '*.js'],
