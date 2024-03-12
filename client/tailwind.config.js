@@ -82,6 +82,7 @@ export default {
       sans: ['var(--font-family-sans)', ...defaultTheme.fontFamily.sans],
     },
     fontWeight: {
+      extralight: 'var(--font-weight-extralight)',
       regular: 'var(--font-weight-regular)',
       medium: 'var(--font-weight-medium)',
       semibold: 'var(--font-weight-semibold)',
