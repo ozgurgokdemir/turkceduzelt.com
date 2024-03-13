@@ -35,6 +35,15 @@ export default {
           hover: 'hsl(var(--color-bg-fill-critical-hover))',
         },
       },
+      border: {
+        primary: 'hsl(var(--color-border))',
+        hover: 'hsl(var(--color-border-hover))',
+        secondary: 'hsl(var(--color-border-secondary))',
+        focus: 'hsl(var(--color-border-focus))',
+        brand: 'hsl(var(--color-border-brand))',
+        success: 'hsl(var(--color-border-success))',
+        critical: 'hsl(var(--color-border-critical))',
+      },
     },
     textColor: {
       primary: 'hsl(var(--color-text))',
