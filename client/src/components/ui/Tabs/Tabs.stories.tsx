@@ -1,36 +1,37 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import TabsComponent from './Tabs';
+import Tabs from './index';
 
 const meta = {
   title: 'ui/Tabs',
-  component: TabsComponent.Root,
+  component: Tabs,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof TabsComponent.Root>;
+} satisfies Meta<typeof Tabs>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Tabs: Story = {
+export const Default: Story = {
+  name: 'Tabs',
   render: () => (
-    <TabsComponent.Root defaultValue="all" className="w-96">
-      <TabsComponent.List className="w-full">
-        <TabsComponent.Trigger value="all" className="flex-1">
+    <Tabs defaultValue="all" className="w-96">
+      <Tabs.List className="w-full">
+        <Tabs.Trigger value="all" className="flex-1">
           Hepsi
-        </TabsComponent.Trigger>
-        <TabsComponent.Trigger value="word" className="flex-1">
+        </Tabs.Trigger>
+        <Tabs.Trigger value="word" className="flex-1">
           Kelime
-        </TabsComponent.Trigger>
-        <TabsComponent.Trigger value="sentence" className="flex-1">
+        </Tabs.Trigger>
+        <Tabs.Trigger value="sentence" className="flex-1">
           Cümle
-        </TabsComponent.Trigger>
-      </TabsComponent.List>
-      <TabsComponent.Content value="all">Hepsi</TabsComponent.Content>
-      <TabsComponent.Content value="word">Kelime</TabsComponent.Content>
-      <TabsComponent.Content value="sentence">Cümle</TabsComponent.Content>
-    </TabsComponent.Root>
+        </Tabs.Trigger>
+      </Tabs.List>
+      <Tabs.Content value="all">Hepsi</Tabs.Content>
+      <Tabs.Content value="word">Kelime</Tabs.Content>
+      <Tabs.Content value="sentence">Cümle</Tabs.Content>
+    </Tabs>
   ),
 };
