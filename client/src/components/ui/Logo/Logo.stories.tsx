@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import LogoComponent from './Logo';
 
 const meta = {
-  title: 'layout/Logo',
+  title: 'ui/Logo',
   component: LogoComponent,
   parameters: {
     layout: 'centered',

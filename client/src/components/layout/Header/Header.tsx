@@ -1,5 +1,4 @@
-import { Logo } from '@/components/layout';
-import { Button } from '@/components/ui';
+import { Logo, Button } from '@/components/ui';
 
 function Header() {
   return (
