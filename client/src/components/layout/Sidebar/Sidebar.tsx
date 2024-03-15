@@ -5,41 +5,34 @@ import {
   FilePen,
   FileSearch,
   MessageSquareMore,
-  type LucideIcon,
 } from 'lucide-react';
-import { NavLink, Separator } from '@/components/ui';
+import { Separator } from '@/components/ui';
+import SidebarItem, { type SidebarItemProps } from './SidebarItem';
 
-type Link = {
-  href: string;
-  title: string;
-  icon: LucideIcon;
-  active?: boolean;
-};
-
-const features: Link[] = [
+const features: SidebarItemProps[] = [
   { href: '', title: 'Metin düzeltici', icon: FileCheck2, active: true },
   { href: '', title: 'Metin şekillendirici', icon: FilePen },
   { href: '', title: 'Metin özetleyici', icon: FileSearch },
 ];
 
-const misc: Link[] = [
+const misc: SidebarItemProps[] = [
   { href: '', title: 'Bize ulaşın', icon: MessageSquareMore },
 ];
 
-const navGroups: Link[][] = [features, misc];
+const navGroups: SidebarItemProps[][] = [features, misc];
 
 type SidebarProps = React.ComponentPropsWithoutRef<'aside'>;
 
 function Sidebar({ className, ...props }: SidebarProps) {
   return (
     <aside className={cx('border-r border-primary', className)} {...props}>
-      <nav className="px-8 py-6">
+      <nav className="p-6">
         {navGroups.map((group, groupIndex) => (
           <React.Fragment key={groupIndex}>
             <ul className="space-y-1">
               {group.map((link, linkIndex) => (
                 <li key={linkIndex}>
-                  <NavLink {...link} className="w-full" />
+                  <SidebarItem {...link} />
                 </li>
               ))}
             </ul>

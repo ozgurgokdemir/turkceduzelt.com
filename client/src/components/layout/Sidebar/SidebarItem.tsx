@@ -2,14 +2,14 @@ import type { LucideIcon } from 'lucide-react';
 import * as React from 'react';
 import { cx } from 'class-variance-authority';
 
-type NavLinkProps = React.ComponentPropsWithRef<'a'> & {
+export type SidebarItemProps = React.ComponentPropsWithRef<'a'> & {
   title: string;
   icon: LucideIcon;
   active?: boolean;
   disabled?: boolean;
 };
 
-const NavLink = React.forwardRef<HTMLAnchorElement, NavLinkProps>(
+const SidebarItem = React.forwardRef<HTMLAnchorElement, SidebarItemProps>(
   (
     {
       title,
@@ -23,7 +23,7 @@ const NavLink = React.forwardRef<HTMLAnchorElement, NavLinkProps>(
   ) => (
     <a
       className={cx(
-        'inline-flex h-12 items-center gap-4 whitespace-nowrap rounded-lg px-4 ring-offset-bg-surface transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2',
+        'inline-flex h-12 w-full items-center gap-4 whitespace-nowrap rounded-lg px-6 ring-offset-bg-surface transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2',
         active ? 'bg-surface-active' : 'bg-surface hover:bg-surface-hover',
         disabled && 'pointer-events-none opacity-50',
         className,
@@ -37,6 +37,6 @@ const NavLink = React.forwardRef<HTMLAnchorElement, NavLinkProps>(
   ),
 );
 
-NavLink.displayName = 'NavLink';
+SidebarItem.displayName = 'SidebarItem';
 
-export default NavLink;
+export default SidebarItem;

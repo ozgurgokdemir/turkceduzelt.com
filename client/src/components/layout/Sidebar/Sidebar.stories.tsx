@@ -15,5 +15,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Sidebar: Story = {
-  render: () => <SidebarComponent className="w-96" />,
+  render: () => <SidebarComponent className="w-80" />,
 };
