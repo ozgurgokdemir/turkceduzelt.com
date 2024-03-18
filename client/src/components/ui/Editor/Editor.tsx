@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cx } from 'class-variance-authority';
 import { Download, Copy, Trash, MoreHorizontal } from 'lucide-react';
-import { Button, Separator } from '@/components/ui';
+import { Button, Separator, Typography } from '@/components/ui';
 
 type EditorProps = React.ComponentPropsWithRef<'div'>;
 
@@ -58,7 +58,10 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
 
     return (
       <div
-        className={cx('rounded-xl border border-primary bg-surface', className)}
+        className={cx(
+          'overflow-hidden rounded-xl border border-primary bg-surface',
+          className,
+        )}
         ref={ref}
         {...props}
       >
@@ -75,11 +78,13 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
             </Button>
           ))}
         </div>
-        <textarea
-          value={text}
-          onChange={handleChange}
-          className="aspect-video w-full p-6 focus-visible:outline-none"
-        ></textarea>
+        <Typography variant="body-md" asChild>
+          <textarea
+            value={text}
+            onChange={handleChange}
+            className="block aspect-video w-full resize-none p-6 text-primary focus-visible:outline-none"
+          ></textarea>
+        </Typography>
       </div>
     );
   },
