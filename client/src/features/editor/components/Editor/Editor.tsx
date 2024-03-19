@@ -2,12 +2,13 @@ import * as React from 'react';
 import { cx } from 'class-variance-authority';
 import { Download, Copy, Trash, MoreHorizontal } from 'lucide-react';
 import { Button, Separator, Typography } from '@/components/ui';
+import { useEditor } from '@/features/editor';
 
 type EditorProps = React.ComponentPropsWithRef<'div'>;
 
 const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
   ({ className, ...props }, ref) => {
-    const [text, setText] = React.useState('');
+    const { text, setText } = useEditor();
 
     const toolbar = [
       {

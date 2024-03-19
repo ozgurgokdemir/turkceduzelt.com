@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Editor from './Editor';
+import { EditorProvider, Editor } from '@/features/editor';
 
 const meta = {
-  title: 'ui/Editor',
+  title: 'features/Editor',
   component: Editor,
   parameters: {
     layout: 'centered',
@@ -16,7 +16,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: 'Editor',
-  args: {},
+  decorators: [
+    (Story) => (
+      <EditorProvider>
+        <Story />
+      </EditorProvider>
+    ),
+  ],
   render: (args) => (
     <div className="w-[800px]">
       <Editor className="w-full" {...args} />
