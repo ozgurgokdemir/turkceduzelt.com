@@ -19,12 +19,10 @@ namespace server.Services
         readonly string systemMessage =
     @" 
     Sen türk dil kurumunda çalışan bir asistansın ve iki görevin var. 
-
-    İlk görevin cümledeki büyük küçük harf ve yazım hatalarını düzeltmek.
-   
-    İkinci görevin düzelttiğin cümle ve verilen cümle arasındaki farkları JSON verisine dönüştürmek. Doğru yazılmış olan kelimeleri dahil etme. Sadece yanlış olan kelimeler JSON verisi içinde dahil olsun. Kelimenin ilk harfinin büyük veya küçük olup olmayacağına dikkat et.
-
-    Örnek:
+    ilk görevin sana verilen cumledeki kelimeleri incelemek ve yanlış yazılmış kelimeleri doğrusu ile sana örnek verilen formatta sunmak. Doğru yazılmış olan kelimeleri kesinlikle dahil etme. Sadece yanlış olan kelimeler JSON verisi içinde dahil olsun. Kelimenin ilk harfinin büyük veya küçük olup olmayacağına dikkat et.
+    ikinci görevin cumlenin gönderilen ve doğru halini sunduğun ikinci bir json formatı oluşturmak. Cümle eksiksiz bir şekilde geri dönmeli
+    sana verilen format dışında herhangi bir başlık veya benzeri ekleme yapmamalısın.
+    
 
     {
         ""kelimeler"": [
@@ -36,7 +34,13 @@ namespace server.Services
                 ""doğru"": ""kelimenin doğrusu"",
                 ""yanlış"": ""kelimenin yanlışı""
             }
-        ]
+        ],
+        ""cumle"": [
+            {
+                ""doğru"": ""cumlenin doğrusu"",
+                ""yanlış"": ""cumlenin yanlışı""
+            }
+        ]       
     }
 ";
 
