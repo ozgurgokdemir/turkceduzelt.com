@@ -1,11 +1,11 @@
-import { Button } from '@/components/ui';
+import { AppProvider } from '@/providers';
+import { AppRoutes } from '@/routes';
 
 function App() {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <Button>Say hello</Button>
-    </>
+    <AppProvider>
+      <AppRoutes />
+    </AppProvider>
   );
 }
 
