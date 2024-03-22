@@ -84,5 +84,26 @@ namespace server.Services
             ChatResponseMessage responseMessage = response.Value.Choices[0].Message;
             return (responseMessage.Content);
         }
+
+        public async Task<string> SendSummarizerMessage(string prompt, string systemMessage)
+        {
+
+            var chatCompletionsOptions = new ChatCompletionsOptions()
+            {
+                DeploymentName = "gpt-3.5-turbo-0125",
+                Messages =
+                      {
+                        new ChatRequestSystemMessage(systemMessage),
+
+                        new ChatRequestUserMessage(prompt),
+
+                      }
+            };
+
+            Response<ChatCompletions> response = await _openAIClient.GetChatCompletionsAsync(chatCompletionsOptions);
+            ChatResponseMessage responseMessage = response.Value.Choices[0].Message;
+            return (responseMessage.Content);
+        }
+
     }
 }
