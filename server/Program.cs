@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,8 +16,10 @@ builder.Services.AddCors(options =>
 
 // Add services to the container.
 
+
+string apiKey = builder.Configuration.GetSection("ApiServiceSettings")["ApiKey"];
 //scopes
-builder.Services.AddScoped<ApiService>(_ => new ApiService("your key"));
+builder.Services.AddScoped<ApiService>(_ => new ApiService(apiKey));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
