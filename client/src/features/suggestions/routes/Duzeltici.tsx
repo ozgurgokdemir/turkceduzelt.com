@@ -6,7 +6,11 @@ import { Suggestion, useSuggestions } from '@/features/suggestions';
 function Duzeltici() {
   const { text } = useEditor();
 
-  const { suggestions, setSuggestions, mutation } = useSuggestions();
+  const {
+    suggestions,
+    setSuggestions,
+    mutation: { mutate: mutateSuggestions },
+  } = useSuggestions();
 
   React.useEffect(() => {
     if (text.trim() === '') {
@@ -15,13 +19,13 @@ function Duzeltici() {
     }
 
     const timeoutId = setTimeout(() => {
-      mutation.mutate(text);
+      mutateSuggestions(text);
     }, 500);
 
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [text]);
+  }, [text, setSuggestions, mutateSuggestions]);
 
   return (
     <main className="grid-row grid w-content grid-cols-[1fr_24rem] grid-rows-[auto_1fr] gap-x-12 gap-y-8 justify-self-center px-6 py-24">
