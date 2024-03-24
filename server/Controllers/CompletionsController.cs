@@ -25,31 +25,61 @@ namespace server.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] string prompt)
         {
+            // Zaman aşımı süresi ve yeniden deneme sayısı
+            var timeout = TimeSpan.FromSeconds(10); // 10 saniye
+            int maxRetries = 3;
+
+            // Yeniden deneme mekanizması
+            int retryCount = 0;
+            Exception lastException = null;
+
+
             if (string.IsNullOrEmpty(prompt))
             {
                 return BadRequest("Prompt cannot be empty.");
             }
 
-            string response = await _apiService.SendApiMessage(prompt);
-
-            
-            try
+            do
             {
-                // JSON verisini C# nesnesine dönüştürme
-                var data = JsonConvert.DeserializeObject<Dictionary<string, List<WordPair>>>(
-                    response
-                );
-                // C# nesnesini JSON verisine döndürme
-                var jsonData = JsonConvert.SerializeObject(data);
+                try
+                {
+                    // HttpClient oluşturun ve zaman aşımı süresini belirleyin
+                    using (var httpClient = new HttpClient())
+                    {
+                        httpClient.Timeout = timeout;
 
-                return Ok(jsonData);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+                        string response = await _apiService.SendApiMessage(prompt);
 
-            
+                        // JSON verisini C# nesnesine dönüştürme
+                        var data = JsonConvert.DeserializeObject<Dictionary<string, List<WordPair>>>(
+                            response
+                        );
+                        // C# nesnesini JSON verisine döndürme
+                        var jsonData = JsonConvert.SerializeObject(data);
+
+                        return Ok(jsonData);
+                    }
+                   
+                }
+                catch (Exception ex)
+                {
+                    // Hata durumunda, hatayı kaydedin ve yeniden deneme sayısını artırın
+                    lastException = ex;
+                    retryCount++;
+
+                    // Bekle ve tekrar dene
+                    await Task.Delay(1000); // 1 saniye bekleme                 
+                }
+            } while (retryCount < maxRetries);
+
+            // Tüm yeniden deneme işlemlerinden sonra hala başarısız olunursa hatayı işleyin
+            if (lastException != null)
+            {                            
+                return BadRequest("An error occurred while processing your request.");
+            }
+          
+            return BadRequest("An error occurred while processing your request.");
+
         }
     }
 }
