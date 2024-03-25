@@ -123,19 +123,15 @@ export default {
     },
     container: {
       center: true,
-      padding: {
-        DEFAULT: '1.5rem',
-        lg: '2rem',
-      },
+      padding: '1.5rem',
     },
     extend: {
       height: {
         header: 'var(--height-header)',
         'screen-without-header': 'calc(100vh - var(--height-header))',
       },
-      width: {
-        sidebar: 'var(--width-sidebar)',
-        content: 'var(--width-content)',
+      screens: {
+        '2xl': '1440px',
       },
       keyframes: {
         'accordion-down': {
