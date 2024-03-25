@@ -1,4 +1,6 @@
 using Microsoft.Extensions.Configuration;
+using Serilog;
+using Serilog.Core;
 using server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,9 +15,15 @@ builder.Services.AddCors(options =>
         });
 });
 
+//SerilogConfiguration
+Logger log = new LoggerConfiguration()
+.WriteTo.Console()
+.MinimumLevel.Information()
+.CreateLogger();
+
+builder.Host.UseSerilog(log);
 
 // Add services to the container.
-
 
 string apiKey = builder.Configuration.GetSection("ApiServiceSettings")["ApiKey"];
 //scopes

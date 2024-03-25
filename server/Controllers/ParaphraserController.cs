@@ -11,10 +11,12 @@ namespace server.Controllers
     public class ParaphraserController : ControllerBase 
     {
         private readonly ApiService _apiService;
+        private readonly ILogger<ParaphraserController> _logger;
 
-        public ParaphraserController(ApiService apiService)
+        public ParaphraserController(ApiService apiService, ILogger<ParaphraserController> logger)
         {
             _apiService = apiService;
+            _logger = logger;
         }
 
         readonly string paraphraserMessageFormal = @"sen türkçede uzmanlaşmış bir asistansın ve görevin sana verdiğimiz
@@ -33,29 +35,42 @@ namespace server.Controllers
             string systemMessage;
             if (string.IsNullOrEmpty(prompt))
             {
+                _logger.LogError("Received request with empty prompt.");
                 return BadRequest("Prompt cannot be empty.");
             }
 
-            if(value == 1)
+            try
             {
-                systemMessage = paraphraserMessageFormal;
+                if (value == 1)
+                {
+                    systemMessage = paraphraserMessageFormal;
+                }
+                else if (value == 2)
+                {
+                    systemMessage = paraphraserMessageNotr;
+                }
+                else if (value == 3)
+                {
+                    systemMessage = paraphraserMessageFriendly;
+                }
+                else
+                {
+                    _logger.LogError("wrong value added");
+                    return BadRequest("false value");
+                }
+
+
+                string response = await _apiService.SendParaphraserMessage(prompt, systemMessage); ;
+
+                _logger.LogInformation("transaction successful");
+                return Ok(response);
             }
-            else if(value == 2)
+            catch (Exception ex)
             {
-                systemMessage = paraphraserMessageNotr;
-            }
-            else if (value == 3)
-            {
-                systemMessage = paraphraserMessageFriendly;
-            }
-            else
-            {
-                return BadRequest("false value");
+                _logger.LogError(ex, "An error occurred while processing the request.");
+                return StatusCode(500, "An error occurred while processing the request.");
             }
 
-            string response =  await _apiService.SendParaphraserMessage(prompt, systemMessage); ;
-
-            return Ok(response);
         }
 
        
