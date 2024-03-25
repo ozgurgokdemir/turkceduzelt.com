@@ -10,10 +10,12 @@ namespace server.Controllers
     public class CompletionsController : ControllerBase
     {
         private readonly ApiService _apiService;
+        private readonly ILogger<CompletionsController> _logger;
 
-        public CompletionsController(ApiService apiService)
+        public CompletionsController(ApiService apiService, ILogger<CompletionsController> logger)
         {
             _apiService = apiService;
+            _logger = logger;
         }
 
         public class WordPair
@@ -36,6 +38,7 @@ namespace server.Controllers
 
             if (string.IsNullOrEmpty(prompt))
             {
+                _logger.LogError("Received request with empty prompt.");
                 return BadRequest("Prompt cannot be empty.");
             }
 
@@ -59,11 +62,14 @@ namespace server.Controllers
                             // C# nesnesini JSON verisine döndürme
                             var jsonData = JsonConvert.SerializeObject(data);
 
+                            _logger.LogInformation("transaction successful");
                             return Ok(jsonData);
+                            
                         }
                         catch(JsonSerializationException ex) 
                         {
-                            // JSON formatına dönüştürme işlemi sırasında hata meydana geldi
+                            // JSON formatına dönüştürme işlemi sırasında hata meydana geldi ve log tutuldu
+                            _logger.LogError(ex, "An error occurred while serializing object to JSON.");
 
                             return BadRequest("An error occurred while processing your request.");
                         }
@@ -84,7 +90,8 @@ namespace server.Controllers
 
             // Tüm yeniden deneme işlemlerinden sonra hala başarısız olunursa hatayı işleyin
             if (lastException != null)
-            {                            
+            {
+                _logger.LogError("Maximum retry count exceeded.");
                 return BadRequest("An error occurred while processing your request.");
             }
           
