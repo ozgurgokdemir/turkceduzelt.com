@@ -9,10 +9,12 @@ namespace server.Controllers
     public class SummarizerController : ControllerBase
     {
         private readonly ApiService _apiService;
+        private readonly ILogger<SummarizerController> _logger;
 
-        public SummarizerController(ApiService apiService)
+        public SummarizerController(ApiService apiService, ILogger<SummarizerController> logger)
         {
             _apiService = apiService;
+            _logger = logger;
         }
 
         readonly string systemMessage = @"sen türkçede uzmanlaşmış bir asistansın ve görevin sana verdiğimiz metinleri anlam
@@ -25,12 +27,23 @@ namespace server.Controllers
           
             if (string.IsNullOrEmpty(prompt))
             {
+                _logger.LogError("wrong value added");
                 return BadRequest("Prompt cannot be empty.");
             }           
 
-            string response = await _apiService.SendSummarizerMessage(prompt, systemMessage); ;
+            try
+            {
+                string response = await _apiService.SendSummarizerMessage(prompt, systemMessage); ;
 
-            return Ok(response);
+                _logger.LogInformation("transaction successful");
+                return Ok(response);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while processing the request.");
+                return StatusCode(500, "An error occurred while processing the request.");
+            }
+            
         }
     }
 }
