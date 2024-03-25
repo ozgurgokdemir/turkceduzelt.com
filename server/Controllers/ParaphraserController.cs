@@ -36,21 +36,28 @@ namespace server.Controllers
                 return BadRequest("Prompt cannot be empty.");
             }
 
-            if(value == 1)
+            try
             {
-                systemMessage = paraphraserMessageFormal;
+                if (value == 1)
+                {
+                    systemMessage = paraphraserMessageFormal;
+                }
+                else if (value == 2)
+                {
+                    systemMessage = paraphraserMessageNotr;
+                }
+                else if (value == 3)
+                {
+                    systemMessage = paraphraserMessageFriendly;
+                }
+                else
+                {
+                    return BadRequest("false value");
+                }
             }
-            else if(value == 2)
+            catch
             {
-                systemMessage = paraphraserMessageNotr;
-            }
-            else if (value == 3)
-            {
-                systemMessage = paraphraserMessageFriendly;
-            }
-            else
-            {
-                return BadRequest("false value");
+                return StatusCode(500, "An error occurred while processing the request.");
             }
 
             string response =  await _apiService.SendParaphraserMessage(prompt, systemMessage); ;
