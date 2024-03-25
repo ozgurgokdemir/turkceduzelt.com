@@ -50,14 +50,24 @@ namespace server.Controllers
 
                         string response = await _apiService.SendApiMessage(prompt);
 
-                        // JSON verisini C# nesnesine dönüştürme
-                        var data = JsonConvert.DeserializeObject<Dictionary<string, List<WordPair>>>(
-                            response
-                        );
-                        // C# nesnesini JSON verisine döndürme
-                        var jsonData = JsonConvert.SerializeObject(data);
+                        try 
+                        {
+                            // JSON verisini C# nesnesine dönüştürme
+                            var data = JsonConvert.DeserializeObject<Dictionary<string, List<WordPair>>>(
+                                response
+                            );
+                            // C# nesnesini JSON verisine döndürme
+                            var jsonData = JsonConvert.SerializeObject(data);
 
-                        return Ok(jsonData);
+                            return Ok(jsonData);
+                        }
+                        catch(JsonSerializationException ex) 
+                        {
+                            // JSON formatına dönüştürme işlemi sırasında hata meydana geldi
+
+                            return BadRequest("An error occurred while processing your request.");
+                        }
+                       
                     }
                    
                 }
