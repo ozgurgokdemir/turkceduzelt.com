@@ -28,7 +28,7 @@ function Duzeltici() {
   }, [text, setSuggestions, mutateSuggestions]);
 
   return (
-    <main className="grid-row grid w-content grid-cols-[1fr_24rem] grid-rows-[auto_1fr] gap-x-12 gap-y-8 justify-self-center px-6 py-24">
+    <main className="grid-row container grid grid-cols-[1fr_24rem] grid-rows-[auto_1fr] gap-x-12 gap-y-8 py-24">
       <header className="flex items-center justify-between">
         <Typography variant="heading-4xl" asChild>
           <h1 className="text-primary">Metin düzeltici</h1>
