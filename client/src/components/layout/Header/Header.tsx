@@ -21,13 +21,13 @@ function Header({ className, ...props }: HeaderProps) {
   return (
     <header
       className={cx(
-        'container flex h-header items-center justify-between gap-8 border-b border-primary bg-surface @container',
+        'container flex h-header items-center justify-between gap-8 border-b border-primary bg-surface',
         className,
       )}
       {...props}
     >
       <Logo />
-      <nav className="hidden h-full space-x-1 @4xl:inline-block">
+      <nav className="hidden h-full space-x-1 lg:inline-block">
         {navLinks.map((link) => (
           <a
             key={link.title}
@@ -43,7 +43,7 @@ function Header({ className, ...props }: HeaderProps) {
           </a>
         ))}
       </nav>
-      <div className="hidden items-center gap-6 @4xl:inline-flex">
+      <div className="hidden items-center gap-6 lg:inline-flex">
         <Button variant="outline">
           <Icon icon={MessageSquareMore} variant="secondary" />
           Bize ulaşın
@@ -56,7 +56,7 @@ function Header({ className, ...props }: HeaderProps) {
           <Avatar.Fallback>ÖG</Avatar.Fallback>
         </Avatar>
       </div>
-      <button className="@4xl:hidden">
+      <button className="lg:hidden">
         <Icon icon={Menu} variant="primary" size="lg" />
       </button>
     </header>
