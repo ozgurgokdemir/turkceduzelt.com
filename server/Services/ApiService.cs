@@ -7,13 +7,14 @@ namespace server.Services
     {
         private readonly string _apiKey;
         private readonly OpenAIClient _openAIClient;
+        private readonly ILogger<ApiService> _logger;
 
 
-
-        public ApiService(string apiKey)
+        public ApiService(string apiKey, ILogger<ApiService> logger)
         {
             _apiKey = apiKey;
             _openAIClient = new OpenAIClient(apiKey);
+            _logger = logger;
         }
 
         readonly string systemMessage =
@@ -47,62 +48,85 @@ namespace server.Services
 
         public async Task<string> SendApiMessage(string prompt)
         {
-
-            var chatCompletionsOptions = new ChatCompletionsOptions()
+            try
             {
-                DeploymentName = "gpt-3.5-turbo-0125",
-                Messages =
+                var chatCompletionsOptions = new ChatCompletionsOptions()
+                {
+                    DeploymentName = "gpt-3.5-turbo-0125",
+                    Messages =
                       {
                         new ChatRequestSystemMessage(systemMessage),
 
                         new ChatRequestUserMessage(prompt),
 
                       }
-            };
+                };
 
-            Response<ChatCompletions> response = await _openAIClient.GetChatCompletionsAsync(chatCompletionsOptions);
-            ChatResponseMessage responseMessage = response.Value.Choices[0].Message;
-            return(responseMessage.Content);
+                Response<ChatCompletions> response = await _openAIClient.GetChatCompletionsAsync(chatCompletionsOptions);
+                ChatResponseMessage responseMessage = response.Value.Choices[0].Message;
+                return (responseMessage.Content);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "something wrong in service.");
+                return ("something wrong in service.");
+            }
+            
         }
 
         public async Task<string> SendParaphraserMessage(string prompt,string systemMessage)
         {
-
-            var chatCompletionsOptions = new ChatCompletionsOptions()
+            try
             {
-                DeploymentName = "gpt-3.5-turbo-0125",
-                Messages =
+                var chatCompletionsOptions = new ChatCompletionsOptions()
+                {
+                    DeploymentName = "gpt-3.5-turbo-0125",
+                    Messages =
                       {
                         new ChatRequestSystemMessage(systemMessage),
 
                         new ChatRequestUserMessage(prompt),
 
                       }
-            };
+                };
 
-            Response<ChatCompletions> response = await _openAIClient.GetChatCompletionsAsync(chatCompletionsOptions);
-            ChatResponseMessage responseMessage = response.Value.Choices[0].Message;
-            return (responseMessage.Content);
+                Response<ChatCompletions> response = await _openAIClient.GetChatCompletionsAsync(chatCompletionsOptions);
+                ChatResponseMessage responseMessage = response.Value.Choices[0].Message;
+                return (responseMessage.Content);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "something wrong in service.");
+                return ("something wrong in service.");
+            }
         }
 
         public async Task<string> SendSummarizerMessage(string prompt, string systemMessage)
         {
-
-            var chatCompletionsOptions = new ChatCompletionsOptions()
+            try
             {
-                DeploymentName = "gpt-3.5-turbo-0125",
-                Messages =
+                var chatCompletionsOptions = new ChatCompletionsOptions()
+                {
+                    DeploymentName = "gpt-3.5-turbo-0125",
+                    Messages =
                       {
                         new ChatRequestSystemMessage(systemMessage),
 
                         new ChatRequestUserMessage(prompt),
 
                       }
-            };
+                };
 
-            Response<ChatCompletions> response = await _openAIClient.GetChatCompletionsAsync(chatCompletionsOptions);
-            ChatResponseMessage responseMessage = response.Value.Choices[0].Message;
-            return (responseMessage.Content);
+                Response<ChatCompletions> response = await _openAIClient.GetChatCompletionsAsync(chatCompletionsOptions);
+                ChatResponseMessage responseMessage = response.Value.Choices[0].Message;
+                return (responseMessage.Content);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "something wrong in service.");
+                return ("something wrong in service.");
+            }
+            
         }
 
     }
