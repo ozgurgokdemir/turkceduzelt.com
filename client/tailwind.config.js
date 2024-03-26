@@ -173,5 +173,6 @@ export default {
       });
     },
     'tailwindcss-animate',
+    require('@tailwindcss/container-queries'),
   ],
 };
