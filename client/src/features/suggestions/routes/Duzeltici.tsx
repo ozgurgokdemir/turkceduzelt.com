@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { Button, Icon, Separator, Typography } from '@/components/ui';
 import { Editor, useEditor } from '@/features/editor';
-import { SuggestionTabs, useSuggestions } from '@/features/suggestions';
+import { SuggestionTabs, useSuggestions, NoData } from '@/features/suggestions';
 
 function Duzeltici() {
   const { text } = useEditor();
@@ -90,7 +90,26 @@ function Duzeltici() {
       </header>
       <Editor className="row-start-2 h-fit" />
       <aside className="row-start-2 hidden lg:block">
-        {suggestions ? <SuggestionTabs {...suggestions} /> : null}
+        {suggestions ? (
+          <SuggestionTabs {...suggestions} />
+        ) : (
+          <div className="flex flex-col items-center gap-8 py-8">
+            <NoData className="h-auto w-full max-w-48" />
+            <div className="space-y-2 text-center">
+              <Typography variant="heading-xl" asChild>
+                <h3 className="text-primary">
+                  Kontrol edebileceğimiz bir yazı yok
+                </h3>
+              </Typography>
+              <Typography variant="body-md" asChild>
+                <p className="text-secondary">
+                  Yazmaya başlayın, bir metin yapıştırın, bir taslak açın veya
+                  bir metin belgesi yükleyin.
+                </p>
+              </Typography>
+            </div>
+          </div>
+        )}
       </aside>
     </main>
   );
