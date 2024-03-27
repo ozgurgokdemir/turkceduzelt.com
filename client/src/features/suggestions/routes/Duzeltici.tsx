@@ -37,7 +37,7 @@ function Duzeltici() {
     <main className="container grid grid-cols-1 gap-y-8 py-12 xs:py-16 lg:grid-cols-[1fr_19rem] lg:grid-rows-[auto_1fr] lg:gap-x-8 lg:py-20 xl:grid-cols-[1fr_24rem] xl:gap-x-12 2xl:py-24">
       <header className="flex items-center justify-between">
         <Typography variant="heading-2xl" asChild>
-          <h1 className="whitespace-nowrap text-primary xs:text-3xl md:text-4xl">
+          <h1 className="whitespace-nowrap text-primary xs:text-3xl xs:leading-9 md:text-4xl md:leading-10">
             Metin düzeltici
           </h1>
         </Typography>
@@ -88,6 +88,13 @@ function Duzeltici() {
           Taslaklar
         </Button>
       </header>
+      <Button
+        variant="outline"
+        className="ml-auto hidden self-center lg:inline-flex"
+      >
+        <Icon icon={History} variant="secondary" />
+        Geçmiş
+      </Button>
       <Editor className="row-start-2 h-fit" />
       <aside className="row-start-2 hidden lg:block">
         {suggestions ? (
