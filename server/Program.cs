@@ -3,6 +3,7 @@ using Serilog;
 using Serilog.Core;
 using server.Services;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 //Cors
@@ -27,7 +28,7 @@ builder.Host.UseSerilog(log);
 
 string apiKey = builder.Configuration.GetSection("ApiServiceSettings")["ApiKey"];
 //scopes
-builder.Services.AddScoped<ApiService>(_ => new ApiService(apiKey));
+builder.Services.AddScoped<ApiService>(_ => new ApiService(apiKey, _.GetRequiredService<ILogger<ApiService>>()));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
