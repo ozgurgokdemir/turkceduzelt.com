@@ -5,8 +5,9 @@ import {
   FilePen,
   FileSearch,
   MessageSquareMore,
+  Menu,
 } from 'lucide-react';
-import { Logo, Avatar, Button } from '@/components/ui';
+import { Logo, Avatar, Button, Icon } from '@/components/ui';
 
 type HeaderProps = React.ComponentPropsWithoutRef<'header'>;
 
@@ -26,7 +27,7 @@ function Header({ className, ...props }: HeaderProps) {
       {...props}
     >
       <Logo />
-      <nav className="h-full space-x-1">
+      <nav className="hidden h-full space-x-1 lg:inline-block">
         {navLinks.map((link) => (
           <a
             key={link.title}
@@ -35,24 +36,16 @@ function Header({ className, ...props }: HeaderProps) {
           >
             <Button variant="ghost" asChild>
               <div className="group-hover:bg-surface-hover">
-                <link.icon
-                  size={20}
-                  strokeWidth={1.5}
-                  className="icon-secondary"
-                />
+                <Icon icon={link.icon} variant="secondary" />
                 {link.title}
               </div>
             </Button>
           </a>
         ))}
       </nav>
-      <div className="inline-flex items-center gap-6">
+      <div className="hidden items-center gap-6 lg:inline-flex">
         <Button variant="outline">
-          <MessageSquareMore
-            size={20}
-            strokeWidth={1.5}
-            className="icon-secondary"
-          />
+          <Icon icon={MessageSquareMore} variant="secondary" />
           Bize ulaşın
         </Button>
         <Avatar>
@@ -63,6 +56,9 @@ function Header({ className, ...props }: HeaderProps) {
           <Avatar.Fallback>ÖG</Avatar.Fallback>
         </Avatar>
       </div>
+      <button className="lg:hidden">
+        <Icon icon={Menu} variant="primary" size="lg" />
+      </button>
     </header>
   );
 }

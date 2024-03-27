@@ -121,6 +121,14 @@ export default {
       dense: 'var(--font-letter-spacing-dense)',
       normal: 'var(--font-letter-spacing-normal)',
     },
+    screens: {
+      xs: '480px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1440px',
+    },
     container: {
       center: true,
       padding: '1.5rem',
@@ -129,9 +137,6 @@ export default {
       height: {
         header: 'var(--height-header)',
         'screen-without-header': 'calc(100vh - var(--height-header))',
-      },
-      screens: {
-        '2xl': '1440px',
       },
       keyframes: {
         'accordion-down': {
@@ -173,5 +178,6 @@ export default {
       });
     },
     'tailwindcss-animate',
+    require('@tailwindcss/container-queries'),
   ],
 };
