@@ -6,7 +6,7 @@ type SkeletonProps = React.ComponentPropsWithRef<'div'>;
 const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
   ({ className, ...props }, ref) => (
     <div
-      className={cx('animate-pulse rounded-md bg-fill', className)}
+      className={cx('animate-pulse rounded-xl bg-fill', className)}
       ref={ref}
       {...props}
     />

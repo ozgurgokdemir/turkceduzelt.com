@@ -5,18 +5,16 @@ import {
   History,
   MoreHorizontal,
 } from 'lucide-react';
-import { Button, Icon, Separator, Typography } from '@/components/ui';
+import { Button, Icon, Separator, Skeleton, Typography } from '@/components/ui';
 import { Editor, useEditor } from '@/features/editor';
 import { SuggestionTabs, useSuggestions, NoData } from '@/features/suggestions';
 
 function Duzeltici() {
   const { text } = useEditor();
 
-  const {
-    suggestions,
-    setSuggestions,
-    mutation: { mutate: mutateSuggestions },
-  } = useSuggestions();
+  const { suggestions, setSuggestions, mutation } = useSuggestions();
+
+  const mutateRef = React.useRef(mutation.mutate);
 
   React.useEffect(() => {
     if (text.trim() === '') {
@@ -25,13 +23,13 @@ function Duzeltici() {
     }
 
     const timeoutId = setTimeout(() => {
-      mutateSuggestions(text);
+      mutateRef.current(text);
     }, 500);
 
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [text, setSuggestions, mutateSuggestions]);
+  }, [text, setSuggestions]);
 
   return (
     <main className="container grid grid-cols-1 gap-y-8 py-12 xs:py-16 lg:grid-cols-[1fr_19rem] lg:grid-rows-[auto_1fr] lg:gap-x-8 lg:py-20 xl:grid-cols-[1fr_24rem] xl:gap-x-12 2xl:py-24">
@@ -97,7 +95,15 @@ function Duzeltici() {
       </Button>
       <Editor className="row-start-2 h-fit" />
       <aside className="row-start-2 hidden lg:block">
-        {suggestions ? (
+        {mutation.isPending ? (
+          <div className="space-y-6">
+            <Skeleton className="h-11" />
+            <div className="space-y-4">
+              <Skeleton className="h-20" />
+              <Skeleton className="h-20" />
+            </div>
+          </div>
+        ) : suggestions ? (
           <SuggestionTabs {...suggestions} />
         ) : (
           <div className="flex flex-col items-center gap-8 py-8">
