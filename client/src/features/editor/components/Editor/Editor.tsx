@@ -81,6 +81,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
         </div>
         <Typography variant="body-md" asChild>
           <textarea
+            placeholder="Yazmaya başlayın, bir metin yapıştırın, bir taslak açın veya bir metin belgesi yükleyin."
             value={text}
             onChange={handleChange}
             className="block aspect-video w-full resize-none p-6 text-primary focus-visible:outline-none"
