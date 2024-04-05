@@ -169,11 +169,20 @@ export default {
         '.icon-brand': {
           color: 'hsl(var(--color-icon-brand))',
         },
+        '.icon-brand-on-bg-fill': {
+          color: 'hsl(var(--color-icon-brand-on-bg-fill))',
+        },
         '.icon-success': {
           color: 'hsl(var(--color-icon-success))',
         },
+        '.icon-success-on-bg-fill': {
+          color: 'hsl(var(--color-icon-success-on-bg-fill))',
+        },
         '.icon-critical': {
           color: 'hsl(var(--color-icon-critical))',
+        },
+        '.icon-critical-on-bg-fill': {
+          color: 'hsl(var(--color-icon-critical-on-bg-fill))',
         },
       });
     },

@@ -8,9 +8,9 @@
     --color-bg-surface: 0deg 0% 100%;
     --color-bg-surface-hover: 0deg 0% 98%;
     --color-bg-surface-active: 240deg 5% 96%;
-    --color-bg-surface-brand: 158deg 64% 52%;
-    --color-bg-surface-success: 142deg 77% 73%;
-    --color-bg-surface-critical: 0deg 94% 82%;
+    --color-bg-surface-brand: 152deg 81% 96%;
+    --color-bg-surface-success: 138deg 76% 97%;
+    --color-bg-surface-critical: 0deg 86% 97%;
     --color-bg-fill: 240deg 5% 96%;
     --color-bg-fill-hover: 0deg 0% 98%;
     --color-bg-fill-brand: 158deg 64% 52%;
@@ -31,7 +31,7 @@
     --color-text-success: 142deg 71% 45%;
     --color-text-success-hover: 142deg 69% 58%;
     --color-text-success-on-bg-fill: 0deg 0% 100%;
-    --color-text-critical: 0deg 63% 31%;
+    --color-text-critical: 0deg 84% 60%;
     --color-text-critical-hover: 0deg 91% 71%;
     --color-text-critical-on-bg-fill: 0deg 0% 100%;
 
@@ -39,16 +39,19 @@
     --color-border-hover: 240deg 5% 84%;
     --color-border-secondary: 240deg 5% 96%;
     --color-border-focus: 213deg 94% 68%;
-    --color-border-brand: 158deg 64% 52%;
-    --color-border-success: 142deg 69% 58%;
-    --color-border-critical: 0deg 91% 71%;
+    --color-border-brand: 152deg 76% 80%;
+    --color-border-success: 142deg 77% 73%;
+    --color-border-critical: 0deg 96% 89%;
 
     --color-icon: 240deg 5% 26%;
     --color-icon-secondary: 240deg 4% 46%;
     --color-icon-muted: 240deg 5% 65%;
     --color-icon-brand: 160deg 84% 39%;
+    --color-icon-brand-on-bg-fill: 0deg 0% 100%;
     --color-icon-success: 142deg 71% 45%;
+    --color-icon-success-on-bg-fill: 0deg 0% 100%;
     --color-icon-critical: 0deg 84% 60%;
+    --color-icon-critical-on-bg-fill: 0deg 0% 100%;
 
     --font-family-sans: 'Inter Variable';
 
