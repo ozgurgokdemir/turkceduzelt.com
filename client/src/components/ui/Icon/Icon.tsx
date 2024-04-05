@@ -8,13 +8,50 @@ const iconVariants = cva(null, {
       primary: 'icon-primary',
       secondary: 'icon-secondary',
       muted: 'icon-muted',
-      brand: 'icon-brand',
-      success: 'icon-success',
-      critical: 'icon-critical',
+      brand: '',
+      success: '',
+      critical: '',
+    },
+    onBgFill: {
+      true: '',
+      false: '',
     },
   },
+  compoundVariants: [
+    {
+      variant: 'brand',
+      onBgFill: false,
+      className: 'icon-brand',
+    },
+    {
+      variant: 'brand',
+      onBgFill: true,
+      className: 'icon-brand-on-bg-fill',
+    },
+    {
+      variant: 'success',
+      onBgFill: false,
+      className: 'icon-success',
+    },
+    {
+      variant: 'success',
+      onBgFill: true,
+      className: 'icon-success-on-bg-fill',
+    },
+    {
+      variant: 'critical',
+      onBgFill: false,
+      className: 'icon-critical',
+    },
+    {
+      variant: 'critical',
+      onBgFill: true,
+      className: 'icon-critical-on-bg-fill',
+    },
+  ],
   defaultVariants: {
     variant: 'primary',
+    onBgFill: false,
   },
 });
 
@@ -29,6 +66,7 @@ const Icon = React.forwardRef<SVGSVGElement, IconProps>(
     {
       icon: Icon,
       variant,
+      onBgFill,
       size = 'md',
       strokeWidth = 1.5,
       className,
@@ -38,7 +76,7 @@ const Icon = React.forwardRef<SVGSVGElement, IconProps>(
   ) => {
     return (
       <Icon
-        className={iconVariants({ variant, className })}
+        className={iconVariants({ variant, onBgFill, className })}
         size={size === 'md' ? 20 : size === 'lg' ? 24 : 16}
         strokeWidth={strokeWidth}
         ref={ref}
