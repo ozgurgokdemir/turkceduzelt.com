@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Copy } from 'lucide-react';
-import Button from './Button';
+import { Button, Icon } from '@/components/ui';
 
 const meta = {
   title: 'ui/Button',
@@ -13,66 +13,117 @@ const meta = {
     variant: {
       control: 'select',
     },
+    tone: {
+      control: 'select',
+    },
     size: {
       control: 'select',
     },
   },
+  render: (args) => (
+    <div className="flex items-center gap-3">
+      <Button size="default" {...args}>
+        <Icon
+          icon={Copy}
+          variant={args.tone === 'neutral' ? 'secondary' : args.tone}
+          onBgFill={args.variant === 'filled'}
+        />
+        Button
+      </Button>
+      <Button size="icon" {...args}>
+        <Icon
+          icon={Copy}
+          variant={args.tone === 'neutral' ? 'primary' : args.tone}
+          onBgFill={args.variant === 'filled'}
+        />
+      </Button>
+    </div>
+  ),
 } satisfies Meta<typeof Button>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Filled: Story = {
+export const FilledNeutral: Story = {
   args: {
     variant: 'filled',
+    tone: 'neutral',
   },
-  render: (args) => <Button {...args}>Button</Button>,
 };
 
-export const Outline: Story = {
+export const FilledBrand: Story = {
+  args: {
+    variant: 'filled',
+    tone: 'brand',
+  },
+};
+
+export const FilledSuccess: Story = {
+  args: {
+    variant: 'filled',
+    tone: 'success',
+  },
+};
+
+export const FilledCritical: Story = {
+  args: {
+    variant: 'filled',
+    tone: 'critical',
+  },
+};
+
+export const OutlineNeutral: Story = {
   args: {
     variant: 'outline',
+    tone: 'neutral',
   },
-  render: (args) => <Button {...args}>Button</Button>,
 };
 
-export const Ghost: Story = {
+export const OutlineBrand: Story = {
+  args: {
+    variant: 'outline',
+    tone: 'brand',
+  },
+};
+
+export const OutlineSuccess: Story = {
+  args: {
+    variant: 'outline',
+    tone: 'success',
+  },
+};
+
+export const OutlineCritical: Story = {
+  args: {
+    variant: 'outline',
+    tone: 'critical',
+  },
+};
+
+export const GhostNeutral: Story = {
   args: {
     variant: 'ghost',
   },
-  render: (args) => <Button {...args}>Button</Button>,
 };
 
-export const Brand: Story = {
-  args: {
-    variant: 'brand',
-  },
-  render: (args) => <Button {...args}>Button</Button>,
-};
-
-export const Success: Story = {
-  args: {
-    variant: 'success',
-  },
-  render: (args) => <Button {...args}>Button</Button>,
-};
-
-export const Critical: Story = {
-  args: {
-    variant: 'critical',
-  },
-  render: (args) => <Button {...args}>Button</Button>,
-};
-
-export const Icon: Story = {
+export const GhostBrand: Story = {
   args: {
     variant: 'ghost',
-    size: 'icon',
+    tone: 'brand',
   },
-  render: (args) => (
-    <Button {...args}>
-      <Copy size={20} strokeWidth={1.5} className="icon-primary" />
-    </Button>
-  ),
+};
+
+export const GhostSuccess: Story = {
+  args: {
+    variant: 'ghost',
+    tone: 'success',
+  },
+};
+
+export const GhostCritical: Story = {
+  args: {
+    variant: 'ghost',
+    tone: 'critical',
+  },
 };
