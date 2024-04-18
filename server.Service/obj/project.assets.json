@@ -1,48 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {
-      "server.Core/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "compile": {
-          "bin/placeholder/server.Core.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/server.Core.dll": {}
-        }
-      },
-      "server.Data/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "server.Core": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/server.Data.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/server.Data.dll": {}
-        }
-      }
-    }
+    "net6.0": {}
   },
-  "libraries": {
-    "server.Core/1.0.0": {
-      "type": "project",
-      "path": "../server.Core/server.Core.csproj",
-      "msbuildProject": "../server.Core/server.Core.csproj"
-    },
-    "server.Data/1.0.0": {
-      "type": "project",
-      "path": "../server.Data/server.Data.csproj",
-      "msbuildProject": "../server.Data/server.Data.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net6.0": [
-      "server.Data >= 1.0.0"
-    ]
+    "net6.0": []
   },
   "packageFolders": {
     "C:\\Users\\ufuk\\.nuget\\packages\\": {}
@@ -70,11 +33,7 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {
-            "C:\\Users\\ufuk\\source\\repos\\turkceduzelt.com\\server.Data\\server.Data.csproj": {
-              "projectPath": "C:\\Users\\ufuk\\source\\repos\\turkceduzelt.com\\server.Data\\server.Data.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

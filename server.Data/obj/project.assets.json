@@ -1,30 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {
-      "server.Core/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "compile": {
-          "bin/placeholder/server.Core.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/server.Core.dll": {}
-        }
-      }
-    }
+    "net6.0": {}
   },
-  "libraries": {
-    "server.Core/1.0.0": {
-      "type": "project",
-      "path": "../server.Core/server.Core.csproj",
-      "msbuildProject": "../server.Core/server.Core.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net6.0": [
-      "server.Core >= 1.0.0"
-    ]
+    "net6.0": []
   },
   "packageFolders": {
     "C:\\Users\\ufuk\\.nuget\\packages\\": {}
@@ -52,11 +33,7 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {
-            "C:\\Users\\ufuk\\source\\repos\\turkceduzelt.com\\server.Core\\server.Core.csproj": {
-              "projectPath": "C:\\Users\\ufuk\\source\\repos\\turkceduzelt.com\\server.Core\\server.Core.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
