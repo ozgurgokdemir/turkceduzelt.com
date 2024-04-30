@@ -1,11 +1,47 @@
-import { AppProvider } from '@/providers';
-import { AppRoutes } from '@/routes';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { EditorProvider } from '@/features/editor';
+import { SuggestionsProvider, Duzeltici } from '@/features/suggestions';
+import { AppLayout } from '@/components/layout';
+
+const queryClient = new QueryClient();
+
+const router = createBrowserRouter([
+  {
+    path: '/duzeltici',
+    element: (
+      <AppLayout>
+        <Duzeltici />
+      </AppLayout>
+    ),
+  },
+  {
+    path: '/sekillendirici',
+    element: (
+      <AppLayout>
+        <div>Şekillendirici</div>
+      </AppLayout>
+    ),
+  },
+  {
+    path: '/ozetleyici',
+    element: (
+      <AppLayout>
+        <div>Özetleyici</div>
+      </AppLayout>
+    ),
+  },
+]);
 
 function App() {
   return (
-    <AppProvider>
-      <AppRoutes />
-    </AppProvider>
+    <QueryClientProvider client={queryClient}>
+      <EditorProvider>
+        <SuggestionsProvider>
+          <RouterProvider router={router} />
+        </SuggestionsProvider>
+      </EditorProvider>
+    </QueryClientProvider>
   );
 }
 
