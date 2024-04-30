@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { EditorProvider } from '@/features/editor';
 import { SuggestionsProvider, Duzeltici } from '@/features/suggestions';
 import { AppLayout } from '@/components/layout';
+import { Sekillendirici } from '@/features/paraphraser';
 
 const queryClient = new QueryClient();
 
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
     path: '/sekillendirici',
     element: (
       <AppLayout>
-        <div>Şekillendirici</div>
+        <Sekillendirici />
       </AppLayout>
     ),
   },
