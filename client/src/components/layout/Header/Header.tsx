@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { cx } from 'class-variance-authority';
 import {
   FileCheck2,
@@ -12,9 +13,9 @@ import { Logo, Avatar, Button, Icon } from '@/components/ui';
 type HeaderProps = React.ComponentPropsWithoutRef<'header'>;
 
 const navLinks = [
-  { href: '', title: 'Düzeltici', icon: FileCheck2 },
-  { href: '', title: 'Şekillendirici', icon: FilePen },
-  { href: '', title: 'Özetleyici', icon: FileSearch },
+  { href: '/duzeltici', title: 'Düzeltici', icon: FileCheck2 },
+  { href: '/sekillendirici', title: 'Şekillendirici', icon: FilePen },
+  { href: '/ozetleyici', title: 'Özetleyici', icon: FileSearch },
 ];
 
 function Header({ className, ...props }: HeaderProps) {
@@ -29,9 +30,9 @@ function Header({ className, ...props }: HeaderProps) {
       <Logo />
       <nav className="hidden h-full space-x-1 lg:inline-block">
         {navLinks.map((link) => (
-          <a
+          <Link
             key={link.title}
-            href={link.href}
+            to={link.href}
             className="group inline-flex h-full items-center"
           >
             <Button variant="ghost" asChild>
@@ -40,7 +41,7 @@ function Header({ className, ...props }: HeaderProps) {
                 {link.title}
               </div>
             </Button>
-          </a>
+          </Link>
         ))}
       </nav>
       <div className="hidden items-center gap-6 lg:inline-flex">
