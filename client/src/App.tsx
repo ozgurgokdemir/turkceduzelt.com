@@ -4,6 +4,7 @@ import { EditorProvider } from '@/features/editor';
 import { SuggestionsProvider, Duzeltici } from '@/features/suggestions';
 import { AppLayout } from '@/components/layout';
 import { Sekillendirici } from '@/features/paraphraser';
+import { Ozetleyici } from '@/features/summarizer';
 
 const queryClient = new QueryClient();
 
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
     path: '/ozetleyici',
     element: (
       <AppLayout>
-        <div>Özetleyici</div>
+        <Ozetleyici />
       </AppLayout>
     ),
   },
