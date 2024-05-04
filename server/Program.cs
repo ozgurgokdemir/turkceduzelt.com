@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Core;
+using server.Core.Configurations;
 using server.Services;
 
 
@@ -25,6 +26,8 @@ Logger log = new LoggerConfiguration()
 builder.Host.UseSerilog(log);
 
 // Add services to the container.
+//options pattern
+builder.Services.Configure<CustomTokenOption>(builder.Configuration.GetSection("TokenOption"));
 
 string apiKey = builder.Configuration.GetSection("ApiServiceSettings")["ApiKey"];
 //scopes
