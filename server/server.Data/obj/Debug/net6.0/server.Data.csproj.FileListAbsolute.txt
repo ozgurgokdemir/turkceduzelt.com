@@ -1,0 +1,15 @@
+C:\Users\ufuk\source\repos\turkceduzelt.com\server\server.Data\bin\Debug\net6.0\server.Data.deps.json
+C:\Users\ufuk\source\repos\turkceduzelt.com\server\server.Data\bin\Debug\net6.0\server.Data.runtimeconfig.json
+C:\Users\ufuk\source\repos\turkceduzelt.com\server\server.Data\bin\Debug\net6.0\server.Data.dll
+C:\Users\ufuk\source\repos\turkceduzelt.com\server\server.Data\bin\Debug\net6.0\server.Data.pdb
+C:\Users\ufuk\source\repos\turkceduzelt.com\server\server.Data\bin\Debug\net6.0\server.Core.dll
+C:\Users\ufuk\source\repos\turkceduzelt.com\server\server.Data\bin\Debug\net6.0\server.Core.pdb
+C:\Users\ufuk\source\repos\turkceduzelt.com\server\server.Data\obj\Debug\net6.0\server.Data.csproj.AssemblyReference.cache
+C:\Users\ufuk\source\repos\turkceduzelt.com\server\server.Data\obj\Debug\net6.0\server.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ufuk\source\repos\turkceduzelt.com\server\server.Data\obj\Debug\net6.0\server.Data.csproj.CoreCompileInputs.cache
+C:\Users\ufuk\source\repos\turkceduzelt.com\server\server.Data\obj\Debug\net6.0\server.Data.csproj.CopyComplete
+C:\Users\ufuk\source\repos\turkceduzelt.com\server\server.Data\obj\Debug\net6.0\server.Data.dll
+C:\Users\ufuk\source\repos\turkceduzelt.com\server\server.Data\obj\Debug\net6.0\refint\server.Data.dll
+C:\Users\ufuk\source\repos\turkceduzelt.com\server\server.Data\obj\Debug\net6.0\server.Data.pdb
+C:\Users\ufuk\source\repos\turkceduzelt.com\server\server.Data\obj\Debug\net6.0\server.Data.genruntimeconfig.cache
+C:\Users\ufuk\source\repos\turkceduzelt.com\server\server.Data\obj\Debug\net6.0\ref\server.Data.dll
