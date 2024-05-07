@@ -15,5 +15,7 @@ namespace server.Core.Services
 
         Task<Response<NoDataDto>> RevokeRefreshToken(string refreshToken);
 
+        Task<Response<TokenDto>> CreateTokenByGoogleAsync(GoogleLoginDto request);
+
     }
 }

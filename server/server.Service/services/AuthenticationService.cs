@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Google.Apis.Auth;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Linq;
 using server.Core.DTOs;
 using server.Core.Models;
 using server.Core.Repositories;
@@ -11,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Google.Apis.Auth.GoogleJsonWebSignature;
 
 namespace server.Service.services
 {
@@ -101,5 +104,51 @@ namespace server.Service.services
 
             return Response<NoDataDto>.Success(200);
         }
+
+        public async Task<Response<TokenDto>> CreateTokenByGoogleAsync(GoogleLoginDto request)
+        {
+            ValidationSettings? settings = new GoogleJsonWebSignature.ValidationSettings()
+            {
+                Audience = new List<string>()
+                { "Google-Client-Id" }
+            };
+            Payload payload = await GoogleJsonWebSignature.ValidateAsync(request.IdToken, settings);
+            UserLoginInfo userLoginInfo = new(request.Provider, payload.Subject, request.Provider);
+            UserApp user = await _userManager.FindByLoginAsync(userLoginInfo.LoginProvider, userLoginInfo.ProviderKey);
+
+            bool result = user != null;
+            if (user == null)
+            {
+                user = await _userManager.FindByEmailAsync(payload.Email);
+                if (user == null)
+                {
+                    user = new()
+                    { 
+                    Id = Guid.NewGuid().ToString(),
+                    Email = payload.Email, 
+                    UserName = payload.Email,                   
+                    };
+                    IdentityResult createResult = await _userManager.CreateAsync(user);
+                    result = createResult.Succeeded;
+                }
+            }
+
+            if (result)
+                await _userManager.AddLoginAsync(user, userLoginInfo);
+            else
+                throw new Exception("Invalid external authentication.");
+
+
+            var token = _tokenService.CreateToken(user);
+            await _unitOfWork.CommmitAsync();
+            return Response<TokenDto>.Success(token, 200);
+        }
+        
+
+
+
+
+
+
     }
 }

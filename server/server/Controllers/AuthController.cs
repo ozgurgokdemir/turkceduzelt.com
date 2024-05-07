@@ -77,5 +77,13 @@ namespace server.Controllers
                 return StatusCode((int)result.StatusCode, "Beklenmeyen bir hata oluştu.");
             };
         }
+
+        //api/auth/CreateTokenByGoogle
+        [HttpPost]
+        public async Task<IActionResult> CreateTokenByGoogle(GoogleLoginDto request)
+        {
+            var result = await _authenticationService.CreateTokenByGoogleAsync(request);
+            return Ok(result);
+        }
     }
 }
