@@ -41,6 +41,7 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Services.AddScoped(typeof(IGenericService<,>), typeof(ServiceGeneric<,>));
 builder.Services.Configure<CustomTokenOption>(builder.Configuration.GetSection("TokenOption"));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IMailService,MailService>();
 
 //Database
 builder.Services.AddDbContext<AppDbContext>(options =>
