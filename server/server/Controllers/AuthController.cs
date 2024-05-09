@@ -85,5 +85,24 @@ namespace server.Controllers
             var result = await _authenticationService.CreateTokenByGoogleAsync(request);
             return Ok(result);
         }
+
+        //api/auth/PasswordReset
+        [HttpPost]
+        public async Task<IActionResult> PasswordReset(PasswordResetDto request)
+        {
+             await _authenticationService.PasswordResetAsync(request.Email);
+            return Ok();
+        }
+
+        //api/auth/VerifyResetToken
+        [HttpPost]
+        public async Task<IActionResult> VerifyResetToken(VerifyResetTokenDto verifyResetTokenDto)
+        {
+           var reguest = await _authenticationService.VerifyResetTokenAsync(verifyResetTokenDto.ResetToken,verifyResetTokenDto.UserId);
+            return Ok(reguest);
+        }
+
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Google.Apis.Auth;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
@@ -23,13 +24,15 @@ namespace server.Service.services
         private readonly UserManager<UserApp> _userManager;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IGenericRepository<UserRefreshToken> _userRefreshTokenService;
+        private readonly IMailService _mailService;
 
-        public AuthenticationService(ITokenService tokenService, UserManager<UserApp> userManager, IUnitOfWork unitOfWork, IGenericRepository<UserRefreshToken> userRefreshTokenService)
+        public AuthenticationService(ITokenService tokenService, UserManager<UserApp> userManager, IUnitOfWork unitOfWork, IGenericRepository<UserRefreshToken> userRefreshTokenService, IMailService mailService)
         {
             _tokenService = tokenService;
             _userManager = userManager;
             _unitOfWork = unitOfWork;
             _userRefreshTokenService = userRefreshTokenService;
+            _mailService = mailService;
         }
 
 
@@ -143,12 +146,35 @@ namespace server.Service.services
             await _unitOfWork.CommmitAsync();
             return Response<TokenDto>.Success(token, 200);
         }
+
+        public async Task PasswordResetAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if(user != null)
+            {
+                string resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+                byte[] TokenBytes = Encoding.UTF8.GetBytes(resetToken);
+                resetToken = WebEncoders.Base64UrlEncode(TokenBytes);
+
+                await _mailService.SendPasswordResetMailAsync(email, user.Id, resetToken);
+            }
+
+        }
+
+        public async Task<bool> VerifyResetTokenAsync(string resetToken, string userId)
+        {
+            UserApp user = await _userManager.FindByIdAsync(userId);
+            if(user != null)
+            {
+              byte[] tokenBytes = WebEncoders.Base64UrlDecode(resetToken);
+              resetToken = Encoding.UTF8.GetString(tokenBytes);
+
+              return await _userManager.VerifyUserTokenAsync(user, _userManager.Options.Tokens.PasswordResetTokenProvider,"ResetPassword", resetToken);
+            }
+            return false;
+        }
+
         
-
-
-
-
-
-
     }
 }

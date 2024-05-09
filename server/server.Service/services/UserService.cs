@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.WebUtilities;
 using server.Core.DTOs;
 using server.Core.Models;
 using server.Core.Services;
@@ -44,6 +45,24 @@ namespace server.Service.services
             }
 
             return Response<UserAppDto>.Success(ObjectMapper.Mapper.Map<UserAppDto>(user), 200);
+        }
+
+        public async Task UpdatePassword(string userId, string resetToken, string newPassword)
+        {
+            UserApp user = await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                byte[] tokenBytes =WebEncoders.Base64UrlDecode(resetToken);
+                resetToken = Encoding.UTF8.GetString(tokenBytes);
+
+                IdentityResult result = await _userManager.ResetPasswordAsync(user, resetToken, newPassword);
+                if (result.Succeeded)
+                {
+                    await _userManager.UpdateSecurityStampAsync(user);
+                }
+                else
+                    throw new Exception();
+            }
         }
     }
 }

@@ -6,7 +6,7 @@ using server.Core.Services;
 
 namespace server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -44,6 +44,13 @@ namespace server.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdatePassword(UpdatePasswordDto updatePasswordDto)
+        {
+           await _userService.UpdatePassword(updatePasswordDto.UserId,updatePasswordDto.ResetToken,updatePasswordDto.NewPassword);
+            return Ok();
         }
     }
 }

@@ -46,5 +46,19 @@ namespace server.Service.services
 
             await smtp.SendMailAsync(mail);
         }
+
+        public async Task SendPasswordResetMailAsync(string to, string userId, string resetToken)
+        {
+            StringBuilder mail = new StringBuilder();
+            mail.AppendLine("Merhaba<br>Eğer yeni şifre talebinde bulunduysanız aşağıdaki linkten şifrenizi yenileyebilirsiniz.<br><strong><a target=\"_blank\" href=\"");
+            mail.AppendLine(_configuration["ClientUrl"]);
+            mail.AppendLine("/passwordReset/");
+            mail.AppendLine(userId);
+            mail.AppendLine("/");
+            mail.AppendLine(resetToken);
+            mail.AppendLine("\">Yeni şifre talebi için tıklayınız...</a></strong><br><br>");
+
+            await SendMessageAsync(to,"Şifre Yenileme Talebi",mail.ToString());
+        }
     }
 }

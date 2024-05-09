@@ -17,5 +17,9 @@ namespace server.Core.Services
 
         Task<Response<TokenDto>> CreateTokenByGoogleAsync(GoogleLoginDto request);
 
+        Task PasswordResetAsync(string email);
+        Task<bool> VerifyResetTokenAsync(string resetToken, string userId);
+
+
     }
 }

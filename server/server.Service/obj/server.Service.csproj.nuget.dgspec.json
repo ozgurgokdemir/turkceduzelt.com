@@ -199,6 +199,14 @@
             "Google.Apis.Auth": {
               "target": "Package",
               "version": "[1.68.0, )"
+            },
+            "Microsoft.AspNetCore.WebUtilities": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Utils": {
+              "target": "Package",
+              "version": "[6.0.16, )"
             }
           },
           "imports": [

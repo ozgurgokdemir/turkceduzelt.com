@@ -12,5 +12,7 @@ namespace server.Core.Services
         Task<Response<UserAppDto>> CreateUserAsync(CreateUserDto createUserDto);
 
         Task<Response<UserAppDto>> GetUserByNameAsync(string userName);
+
+        Task UpdatePassword(string userId, string resetToken, string newPassword);
     }
 }
