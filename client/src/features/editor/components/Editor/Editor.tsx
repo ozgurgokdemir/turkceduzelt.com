@@ -7,8 +7,10 @@ import {
   Trash,
   Undo2,
   Redo2,
+  Clipboard,
+  Upload,
 } from 'lucide-react';
-import { Button, Typography } from '@/components/ui';
+import { Button, Icon, Typography } from '@/components/ui';
 import { useEditor } from '@/features/editor';
 
 type EditorProps = React.ComponentPropsWithRef<'div'>;
@@ -21,6 +23,8 @@ type ToolbarItem = React.ComponentPropsWithRef<typeof Button> & {
 const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
   ({ className, ...props }, ref) => {
     const { text, setText } = useEditor();
+
+    const importRef = React.useRef<HTMLInputElement>(null);
 
     const isEmpty = !text.trim();
 
@@ -61,7 +65,9 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
         icon: Copy,
         disabled: isEmpty,
         onClick: () => {
-          void navigator.clipboard.writeText(text);
+          void (async () => {
+            await navigator.clipboard.writeText(text);
+          })();
         },
       },
       {
@@ -81,7 +87,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
     return (
       <div
         className={cx(
-          'overflow-hidden rounded-xl border border-primary bg-surface',
+          'overflow-hidden rounded-xl border border-primary bg-surface @container',
           className,
         )}
         ref={ref}
@@ -107,14 +113,68 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
             ))}
           </ul>
         </div>
-        <Typography variant="body-md" asChild>
-          <textarea
-            placeholder="Yazmaya başlayın, bir metin yapıştırın, bir taslak açın veya bir metin belgesi yükleyin."
-            value={text}
-            onChange={handleChange}
-            className="block aspect-video w-full resize-none p-6 text-primary focus-visible:outline-none"
-          ></textarea>
-        </Typography>
+        <div className="relative">
+          <Typography variant="body-md" asChild>
+            <textarea
+              value={text}
+              onChange={handleChange}
+              className="block aspect-video w-full resize-none p-6 text-primary focus-visible:outline-none"
+            ></textarea>
+          </Typography>
+          {isEmpty && (
+            <div className="pointer-events-none absolute inset-6 space-y-6">
+              <Typography variant="body-md" className="text-muted">
+                Yazmaya başlayın, bir metin yapıştırın, bir taslak açın veya bir
+                metin belgesi yükleyin.
+              </Typography>
+              <div className="flex flex-col gap-2 @[24rem]:flex-row">
+                <Button
+                  variant="outline"
+                  className="pointer-events-auto"
+                  onClick={() => {
+                    void (async () => {
+                      const text = await navigator.clipboard.readText();
+                      setText(text);
+                    })();
+                  }}
+                >
+                  <Icon icon={Clipboard} variant="secondary" />
+                  Metni yapıştır
+                </Button>
+                <Button
+                  variant="outline"
+                  className="pointer-events-auto"
+                  onClick={() => {
+                    importRef.current?.click();
+                  }}
+                >
+                  <Icon icon={Upload} variant="secondary" />
+                  Belgeyi yükle
+                </Button>
+                <input
+                  ref={importRef}
+                  type="file"
+                  accept=".txt"
+                  className="hidden"
+                  onChange={(event) => {
+                    const file = event.target.files?.[0];
+
+                    if (!file || !file.name.endsWith('.txt')) return;
+
+                    const reader = new FileReader();
+
+                    reader.onload = (event) => {
+                      const text = event.target?.result as string;
+                      setText(text);
+                    };
+
+                    reader.readAsText(file);
+                  }}
+                />
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     );
   },
