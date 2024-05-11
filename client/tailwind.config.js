@@ -122,12 +122,11 @@ export default {
       normal: 'var(--font-letter-spacing-normal)',
     },
     screens: {
-      xs: '480px',
-      sm: '640px',
-      md: '768px',
-      lg: '1024px',
-      xl: '1280px',
-      '2xl': '1440px',
+      xs: '30em',
+      sm: '48em',
+      md: '64em',
+      lg: '80em',
+      xl: '90em',
     },
     container: {
       center: true,
