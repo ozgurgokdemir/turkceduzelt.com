@@ -28,7 +28,7 @@ function Header({ className, ...props }: HeaderProps) {
       {...props}
     >
       <Logo />
-      <nav className="hidden h-full space-x-1 lg:inline-block">
+      <nav className="hidden h-full space-x-1 md:inline-block">
         {navLinks.map((link) => (
           <Link
             key={link.title}
@@ -44,7 +44,7 @@ function Header({ className, ...props }: HeaderProps) {
           </Link>
         ))}
       </nav>
-      <div className="hidden items-center gap-6 lg:inline-flex">
+      <div className="hidden items-center gap-6 md:inline-flex">
         <Button variant="outline">
           <Icon icon={MessageSquareMore} variant="secondary" />
           Bize ulaşın
@@ -57,7 +57,7 @@ function Header({ className, ...props }: HeaderProps) {
           <Avatar.Fallback>ÖG</Avatar.Fallback>
         </Avatar>
       </div>
-      <button className="lg:hidden">
+      <button className="md:hidden">
         <Icon icon={Menu} variant="primary" size="lg" />
       </button>
     </header>
