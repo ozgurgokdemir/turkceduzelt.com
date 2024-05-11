@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using server.Core.DTOs;
 using server.Core.Models;
+using server.Core.Repositories;
 using server.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -14,10 +16,12 @@ namespace server.Service.services
     public class UserService : IUserService
     {
         private readonly UserManager<UserApp> _userManager;
+        private readonly IGenericRepository<UserRefreshToken> _userRefreshTokenService;
 
-        public UserService(UserManager<UserApp> userManager)
+        public UserService(UserManager<UserApp> userManager, IGenericRepository<UserRefreshToken> userRefreshTokenService)
         {
             _userManager = userManager;
+            _userRefreshTokenService = userRefreshTokenService;
         }
 
         public async Task<Response<UserAppDto>> CreateUserAsync(CreateUserDto createUserDto)
@@ -47,7 +51,7 @@ namespace server.Service.services
             return Response<UserAppDto>.Success(ObjectMapper.Mapper.Map<UserAppDto>(user), 200);
         }
 
-        public async Task UpdatePassword(string userId, string resetToken, string newPassword)
+        public async Task ResetPasswordAsync(string userId, string resetToken, string newPassword)
         {
             UserApp user = await _userManager.FindByIdAsync(userId);
             if (user != null)
@@ -64,5 +68,36 @@ namespace server.Service.services
                     throw new Exception();
             }
         }
+
+        public async Task<Response<NoDataDto>> ChangePasswordAsync(ChangePasswordDto changePasswordDto)
+        {
+            var existRefreshToken = await _userRefreshTokenService.Where(x => x.Code == changePasswordDto.refreshToken).SingleOrDefaultAsync();
+
+            if (existRefreshToken == null)
+            {
+                return Response<NoDataDto>.Fail("Refresh token not found", 404, false);
+            }
+            var currentUser = await _userManager.FindByIdAsync(existRefreshToken.UserId);
+            if (currentUser == null)
+            {
+                return Response<NoDataDto>.Fail("User Id not found", 404, false);
+            }
+            var checkOldPassword = await _userManager.CheckPasswordAsync(currentUser,changePasswordDto.passwordOld);
+
+            if (!checkOldPassword)
+            {
+                return Response<NoDataDto>.Fail("Your old password wrong", 404, true);
+            }
+
+            var resultChangePassword = await _userManager.ChangePasswordAsync(currentUser,changePasswordDto.passwordOld,changePasswordDto.passwordNew);
+            
+            if(!resultChangePassword.Succeeded)
+            {
+                return Response<NoDataDto>.Fail("Your password could not be changed",404,true);
+            }
+            return Response<NoDataDto>.Success(200);
+            
+        }
+        
     }
 }

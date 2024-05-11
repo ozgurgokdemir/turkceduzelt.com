@@ -47,10 +47,19 @@ namespace server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdatePassword(UpdatePasswordDto updatePasswordDto)
+        public async Task<IActionResult> ResetPassword(UpdatePasswordDto updatePasswordDto)
         {
-           await _userService.UpdatePassword(updatePasswordDto.UserId,updatePasswordDto.ResetToken,updatePasswordDto.NewPassword);
+           await _userService.ResetPasswordAsync(updatePasswordDto.UserId,updatePasswordDto.ResetToken,updatePasswordDto.NewPassword);
             return Ok();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDto changePasswordDto)
+        {
+          var result = await _userService.ChangePasswordAsync(changePasswordDto); 
+            return Ok(result);
+        }
+
+
     }
 }

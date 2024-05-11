@@ -13,6 +13,8 @@ namespace server.Core.Services
 
         Task<Response<UserAppDto>> GetUserByNameAsync(string userName);
 
-        Task UpdatePassword(string userId, string resetToken, string newPassword);
+        Task ResetPasswordAsync(string userId, string resetToken, string newPassword);
+
+        Task<Response<NoDataDto>> ChangePasswordAsync(ChangePasswordDto changePasswordDto);
     }
 }

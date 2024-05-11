@@ -10,6 +10,7 @@
         "dependencies": {
           "AutoMapper": "13.0.1",
           "Google.Apis.Auth": "1.68.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.29",
           "Microsoft.AspNetCore.WebUtilities": "2.2.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Utils": "6.0.16",
           "server.Data": "1.0.0"
