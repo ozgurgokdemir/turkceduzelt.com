@@ -1,22 +1,48 @@
 import * as React from 'react';
 import { cx } from 'class-variance-authority';
-import { Download, Copy, Trash, MoreHorizontal } from 'lucide-react';
-import { Button, Separator, Typography } from '@/components/ui';
+import {
+  type LucideIcon,
+  Download,
+  Copy,
+  Trash,
+  Undo2,
+  Redo2,
+} from 'lucide-react';
+import { Button, Typography } from '@/components/ui';
 import { useEditor } from '@/features/editor';
 
 type EditorProps = React.ComponentPropsWithRef<'div'>;
+
+type ToolbarItem = React.ComponentPropsWithRef<typeof Button> & {
+  label: string;
+  icon: LucideIcon;
+};
 
 const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
   ({ className, ...props }, ref) => {
     const { text, setText } = useEditor();
 
-    const toolbar = [
+    const isEmpty = !text.trim();
+
+    const toolbarLeft: ToolbarItem[] = [
+      {
+        label: 'Geri al',
+        icon: Undo2,
+        disabled: true,
+      },
+      {
+        label: 'Yeniden yap',
+        icon: Redo2,
+        disabled: true,
+      },
+    ];
+
+    const toolbarRight: ToolbarItem[] = [
       {
         label: 'İndir',
         icon: Download,
-        handleClick: () => {
-          if (!text.trim()) return;
-
+        disabled: isEmpty,
+        onClick: () => {
           const blob = new Blob([text], {
             type: 'text/plain',
           });
@@ -33,22 +59,17 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
       {
         label: 'Kopyala',
         icon: Copy,
-        handleClick: async () => {
-          await navigator.clipboard.writeText(text);
+        disabled: isEmpty,
+        onClick: () => {
+          void navigator.clipboard.writeText(text);
         },
       },
       {
         label: 'Sil',
         icon: Trash,
-        handleClick: () => {
+        disabled: isEmpty,
+        onClick: () => {
           setText('');
-        },
-      },
-      {
-        label: 'Daha fazlası',
-        icon: MoreHorizontal,
-        handleClick: () => {
-          // open dropdown menu
         },
       },
     ];
@@ -66,18 +87,25 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
         ref={ref}
         {...props}
       >
-        <div className="flex items-center justify-end gap-1 border-b border-primary p-1">
-          <Separator orientation="vertical" className="min-h-4" />
-          {toolbar.map(({ label, icon: Icon, handleClick }) => (
-            <Button
-              key={label}
-              variant="ghost"
-              size="icon"
-              onClick={handleClick}
-            >
-              <Icon size={20} strokeWidth={1.5} className="icon-primary" />
-            </Button>
-          ))}
+        <div className="flex items-center justify-between gap-1 border-b border-primary p-1">
+          <ul className="flex items-center gap-1">
+            {toolbarLeft.map(({ label, icon: Icon, ...props }) => (
+              <li key={label}>
+                <Button variant="ghost" size="icon" {...props}>
+                  <Icon size={20} strokeWidth={1.5} className="icon-primary" />
+                </Button>
+              </li>
+            ))}
+          </ul>
+          <ul className="flex items-center gap-1">
+            {toolbarRight.map(({ label, icon: Icon, ...props }) => (
+              <li key={label}>
+                <Button variant="ghost" size="icon" {...props}>
+                  <Icon size={20} strokeWidth={1.5} className="icon-primary" />
+                </Button>
+              </li>
+            ))}
+          </ul>
         </div>
         <Typography variant="body-md" asChild>
           <textarea
