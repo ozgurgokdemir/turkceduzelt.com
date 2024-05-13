@@ -22,7 +22,16 @@ type ToolbarItem = React.ComponentPropsWithRef<typeof Button> & {
 
 const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
   ({ className, ...props }, ref) => {
-    const { text, setText } = useEditor();
+    const {
+      text,
+      setText,
+      clearText,
+      downloadText,
+      copyText,
+      pasteText,
+      triggerImport,
+      importText,
+    } = useEditor();
 
     const importRef = React.useRef<HTMLInputElement>(null);
 
@@ -46,19 +55,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
         label: 'İndir',
         icon: Download,
         disabled: isEmpty,
-        onClick: () => {
-          const blob = new Blob([text], {
-            type: 'text/plain',
-          });
-
-          const a = document.createElement('a');
-          a.href = URL.createObjectURL(blob);
-          a.download = 'türkçedüzelt.txt';
-
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-        },
+        onClick: downloadText,
       },
       {
         label: 'Kopyala',
@@ -66,7 +63,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
         disabled: isEmpty,
         onClick: () => {
           void (async () => {
-            await navigator.clipboard.writeText(text);
+            await copyText();
           })();
         },
       },
@@ -74,9 +71,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
         label: 'Sil',
         icon: Trash,
         disabled: isEmpty,
-        onClick: () => {
-          setText('');
-        },
+        onClick: clearText,
       },
     ];
 
@@ -133,8 +128,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
                   className="pointer-events-auto"
                   onClick={() => {
                     void (async () => {
-                      const text = await navigator.clipboard.readText();
-                      setText(text);
+                      await pasteText();
                     })();
                   }}
                 >
@@ -145,7 +139,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
                   variant="outline"
                   className="pointer-events-auto"
                   onClick={() => {
-                    importRef.current?.click();
+                    triggerImport(importRef);
                   }}
                 >
                   <Icon icon={Upload} variant="secondary" />
@@ -156,20 +150,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
                   type="file"
                   accept=".txt"
                   className="hidden"
-                  onChange={(event) => {
-                    const file = event.target.files?.[0];
-
-                    if (!file || !file.name.endsWith('.txt')) return;
-
-                    const reader = new FileReader();
-
-                    reader.onload = (event) => {
-                      const text = event.target?.result as string;
-                      setText(text);
-                    };
-
-                    reader.readAsText(file);
-                  }}
+                  onChange={importText}
                 />
               </div>
             </div>
