@@ -17,11 +17,13 @@ namespace server.Service.services
     {
         private readonly UserManager<UserApp> _userManager;
         private readonly IGenericRepository<UserRefreshToken> _userRefreshTokenService;
+        private readonly IAuthenticationService _authenticationService;
 
-        public UserService(UserManager<UserApp> userManager, IGenericRepository<UserRefreshToken> userRefreshTokenService)
+        public UserService(UserManager<UserApp> userManager, IGenericRepository<UserRefreshToken> userRefreshTokenService, IAuthenticationService authenticationService)
         {
             _userManager = userManager;
             _userRefreshTokenService = userRefreshTokenService;
+            _authenticationService = authenticationService;
         }
 
         public async Task<Response<UserAppDto>> CreateUserAsync(CreateUserDto createUserDto)
@@ -36,6 +38,9 @@ namespace server.Service.services
 
                 return Response<UserAppDto>.Fail(new ErrorDto(errors, true), 400);
             }
+
+            // mail gönder
+            _authenticationService.MailConfirmAsync(createUserDto.Email);
             return Response<UserAppDto>.Success(ObjectMapper.Mapper.Map<UserAppDto>(user), 200);
         }
 

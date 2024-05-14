@@ -100,9 +100,10 @@ namespace server.Controllers
         {
            var reguest = await _authenticationService.VerifyResetTokenAsync(verifyResetTokenDto.ResetToken,verifyResetTokenDto.UserId);
             return Ok(reguest);
+            
         }
 
-
+       
 
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
+using NuGet.Common;
 using server.Core.DTOs;
 using server.Core.Models;
 using server.Core.Repositories;
@@ -12,6 +13,7 @@ using server.Core.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using static Google.Apis.Auth.GoogleJsonWebSignature;
@@ -48,6 +50,11 @@ namespace server.Service.services
             {
                 return Response<TokenDto>.Fail("Email or Password is wrong", 400, true);
             }
+            if(user.EmailConfirmed==false)
+            {
+                return Response<TokenDto>.Fail("Email not verified", 400, true);
+            }
+
             var token = _tokenService.CreateToken(user);
 
             var userRefreshToken = await _userRefreshTokenService.Where(x => x.UserId == user.Id).SingleOrDefaultAsync();
@@ -173,8 +180,45 @@ namespace server.Service.services
               return await _userManager.VerifyUserTokenAsync(user, _userManager.Options.Tokens.PasswordResetTokenProvider,"ResetPassword", resetToken);
             }
             return false;
+           
         }
 
-        
+        // kayıtla beraber çalıştır
+        public async Task MailConfirmAsync(string mail)
+        {
+            var user = await _userManager.FindByEmailAsync(mail);
+            if (user != null)
+            {
+                string emailConfirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                byte[] TokenBytes = Encoding.UTF8.GetBytes(emailConfirmationToken);
+                emailConfirmationToken = WebEncoders.Base64UrlEncode(TokenBytes);
+
+                await _mailService.SendEmailConfirmationtMailAsync(mail, user.Id, emailConfirmationToken);
+            }        
+        }
+
+        // usercontroller'da çalıştır
+        public async Task<Response<NoDataDto>> VerifyMailConfirmTokenAsync(VerifyMailConfirmTokenDto verifyMailConfirmTokenDto)
+        {
+            UserApp user = await _userManager.FindByIdAsync(verifyMailConfirmTokenDto.userId);
+            if (user == null)
+            {
+                return Response<NoDataDto>.Fail("aa",404,true);
+            }
+            byte[] tokenBytes = WebEncoders.Base64UrlDecode(verifyMailConfirmTokenDto.confirmToken);
+            verifyMailConfirmTokenDto.confirmToken = Encoding.UTF8.GetString(tokenBytes);
+
+            var response = await _userManager.VerifyUserTokenAsync(user, _userManager.Options.Tokens.EmailConfirmationTokenProvider, "EmailConfirmation", verifyMailConfirmTokenDto.confirmToken);
+            if( response == false)
+            {
+                return Response<NoDataDto>.Fail("aa", 404, true);
+            }
+            user.EmailConfirmed = true;
+            await _userManager.UpdateSecurityStampAsync(user);
+
+            return Response<NoDataDto>.Success(200);
+        }
+
     }
 }

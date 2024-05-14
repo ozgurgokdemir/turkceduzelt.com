@@ -11,10 +11,12 @@ namespace server.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IAuthenticationService _authenticationService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IAuthenticationService authenticationService)
         {
             _userService = userService;
+            _authenticationService = authenticationService;
         }
 
         [HttpPost]
@@ -57,6 +59,13 @@ namespace server.Controllers
         public async Task<IActionResult> ChangePassword(ChangePasswordDto changePasswordDto)
         {
           var result = await _userService.ChangePasswordAsync(changePasswordDto); 
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> VerifyMailConfirmToken(VerifyMailConfirmTokenDto verifyMailConfirmTokenDto)
+        {
+            var result =await _authenticationService.VerifyMailConfirmTokenAsync(verifyMailConfirmTokenDto);
             return Ok(result);
         }
 

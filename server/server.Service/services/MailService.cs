@@ -52,7 +52,7 @@ namespace server.Service.services
             StringBuilder mail = new StringBuilder();
             mail.AppendLine("Merhaba<br>Eğer yeni şifre talebinde bulunduysanız aşağıdaki linkten şifrenizi yenileyebilirsiniz.<br><strong><a target=\"_blank\" href=\"");
             mail.AppendLine(_configuration["ClientUrl"]);
-            mail.AppendLine("/passwordReset/");
+            mail.AppendLine("/PasswordReset/");
             mail.AppendLine(userId);
             mail.AppendLine("/");
             mail.AppendLine(resetToken);
@@ -60,5 +60,21 @@ namespace server.Service.services
 
             await SendMessageAsync(to,"Şifre Yenileme Talebi",mail.ToString());
         }
+
+        public async Task SendEmailConfirmationtMailAsync(string to, string userId, string confirmationyToken)
+        {
+            StringBuilder mail = new StringBuilder();
+            mail.AppendLine("Merhaba<br>Aşağıdaki linkten epostanızı doğrulayabilirsiniz.<br><strong><a target=\"_blank\" href=\"");
+            mail.AppendLine(_configuration["ClientUrl"]);
+            mail.AppendLine("/MailConfirm/");
+            mail.AppendLine(userId);
+            mail.AppendLine("/");
+            mail.AppendLine(confirmationyToken);
+            mail.AppendLine("\">Yeni şifre talebi için tıklayınız...</a></strong><br><br>");
+
+            await SendMessageAsync(to, "Şifre Yenileme Talebi", mail.ToString());
+        }
+
+
     }
 }
