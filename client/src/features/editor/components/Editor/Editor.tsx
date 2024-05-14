@@ -13,7 +13,9 @@ import {
 import { Button, Icon, Typography } from '@/components/ui';
 import { useEditor } from '@/features/editor';
 
-type EditorProps = React.ComponentPropsWithRef<'div'>;
+type EditorProps = React.ComponentPropsWithRef<'div'> & {
+  renderAction?: React.ReactNode;
+};
 
 type ToolbarItem = React.ComponentPropsWithRef<typeof Button> & {
   label: string;
@@ -21,7 +23,7 @@ type ToolbarItem = React.ComponentPropsWithRef<typeof Button> & {
 };
 
 const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
-  ({ className, ...props }, ref) => {
+  ({ renderAction, className, ...props }, ref) => {
     const {
       text,
       setText,
@@ -116,7 +118,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
               className="block aspect-video w-full resize-none p-6 text-primary focus-visible:outline-none"
             ></textarea>
           </Typography>
-          {isEmpty && (
+          {isEmpty ? (
             <div className="pointer-events-none absolute inset-6 space-y-6">
               <Typography variant="body-md" className="text-muted">
                 Yazmaya başlayın, bir metin yapıştırın, bir taslak açın veya bir
@@ -154,6 +156,8 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
                 />
               </div>
             </div>
+          ) : (
+            <div className="absolute bottom-6 right-6">{renderAction}</div>
           )}
         </div>
       </div>
