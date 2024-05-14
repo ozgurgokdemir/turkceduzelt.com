@@ -5,7 +5,7 @@ import {
   History,
   MoreHorizontal,
 } from 'lucide-react';
-import { Button, Icon, Skeleton, Typography } from '@/components/ui';
+import { Button, Icon, Skeleton, Spinner, Typography } from '@/components/ui';
 import { Editor, useEditor } from '@/features/editor';
 import { SuggestionTabs, useSuggestions, NoData } from '@/features/suggestions';
 
@@ -88,7 +88,30 @@ function Duzeltici() {
         <Icon icon={History} variant="secondary" />
         Geçmiş
       </Button>
-      <Editor className="row-start-2 h-fit" />
+      <Editor
+        className="row-start-2 h-fit"
+        renderAction={
+          (!!suggestions || mutation.isPending) && (
+            <button
+              type="button"
+              className="flex h-9 w-9 items-center justify-center rounded-full rounded-bl-none bg-fill-critical"
+              disabled={mutation.isPending}
+            >
+              {mutation.isPending ? (
+                <Spinner className="icon-critical-on-bg-fill" />
+              ) : (
+                <Typography
+                  variant="body-lg"
+                  className="text-critical-on-bg-fill"
+                >
+                  {(suggestions?.words.length ?? 0) +
+                    (suggestions?.sentences.length ?? 0)}
+                </Typography>
+              )}
+            </button>
+          )
+        }
+      />
       <aside className="row-start-2 hidden md:block">
         {mutation.isPending ? (
           <div className="space-y-6">
