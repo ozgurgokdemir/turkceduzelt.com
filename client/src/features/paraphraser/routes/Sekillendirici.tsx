@@ -3,12 +3,23 @@ import {
   MoreHorizontal,
   NotepadTextDashed,
   PencilLine,
+  Settings2,
+  Wand2,
 } from 'lucide-react';
-import { Button, Icon, Typography } from '@/components/ui';
-import { Editor } from '@/features/editor';
-import { ParaphraserDocument } from '@/features/paraphraser';
+import { Button, Icon, Spinner, Typography } from '@/components/ui';
+import { Editor, useEditor } from '@/features/editor';
+import { ParaphraserDocument, useParaphraser } from '@/features/paraphraser';
+import { cx } from 'class-variance-authority';
 
 function Sekillendirici() {
+  const { text } = useEditor();
+
+  const { document, mutation } = useParaphraser();
+
+  function handleParaphrase() {
+    mutation.mutate(text);
+  }
+
   return (
     <main className="container grid grid-cols-1 gap-y-6 py-12 xs:gap-y-8 xs:py-16 md:grid-cols-2 md:grid-rows-[auto_1fr] md:py-20 xl:py-24">
       <header className="flex items-center justify-between">
@@ -66,8 +77,45 @@ function Sekillendirici() {
         <Icon icon={History} variant="secondary" />
         Geçmiş
       </Button>
-      <Editor className="rounded-b-none md:rounded-r-none md:rounded-bl-xl" />
-      <ParaphraserDocument className="hidden rounded-t-none border-t-0 md:block md:rounded-l-none md:rounded-tr-xl md:border-l-0 md:border-t" />
+      <Editor
+        className="rounded-b-none md:rounded-r-none md:rounded-bl-xl"
+        renderAction={
+          <div className="flex gap-2">
+            <Button variant="outline" size="icon" className="md:hidden">
+              <Icon icon={Settings2} className="icon-primary" />
+            </Button>
+            <Button
+              variant="filled"
+              tone="brand"
+              disabled={mutation.isPending}
+              onClick={handleParaphrase}
+            >
+              <div
+                className={cx(
+                  'flex items-center gap-3',
+                  mutation.isPending && 'opacity-0',
+                )}
+              >
+                <Icon icon={Wand2} className="icon-brand-on-bg-fill" />
+                Şekillendir
+              </div>
+              {mutation.isPending && (
+                <div className="absolute inset-0 grid place-items-center">
+                  <Spinner className="icon-brand-on-bg-fill" />
+                </div>
+              )}
+            </Button>
+          </div>
+        }
+      />
+      <ParaphraserDocument className="hidden rounded-t-none border-t-0 md:flex md:rounded-l-none md:rounded-tr-xl md:border-l-0 md:border-t">
+        <Typography
+          variant="body-md"
+          className={mutation.isPending ? 'animate-pulse' : undefined}
+        >
+          {!document && mutation.isPending ? text : document}
+        </Typography>
+      </ParaphraserDocument>
     </main>
   );
 }
