@@ -92,19 +92,37 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
       >
         <div className="flex items-center justify-between gap-1 border-b border-primary p-1">
           <ul className="flex items-center gap-1">
-            {toolbarLeft.map(({ label, icon: Icon, ...props }) => (
+            {toolbarLeft.map(({ label, icon: Icon, disabled, ...props }) => (
               <li key={label}>
-                <Button variant="ghost" size="icon" {...props}>
-                  <Icon size={20} strokeWidth={1.5} className="icon-primary" />
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  disabled={disabled}
+                  {...props}
+                >
+                  <Icon
+                    size={20}
+                    strokeWidth={1.5}
+                    className={disabled ? 'icon-muted' : 'icon-primary'}
+                  />
                 </Button>
               </li>
             ))}
           </ul>
           <ul className="flex items-center gap-1">
-            {toolbarRight.map(({ label, icon: Icon, ...props }) => (
+            {toolbarRight.map(({ label, icon: Icon, disabled, ...props }) => (
               <li key={label}>
-                <Button variant="ghost" size="icon" {...props}>
-                  <Icon size={20} strokeWidth={1.5} className="icon-primary" />
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  disabled={disabled}
+                  {...props}
+                >
+                  <Icon
+                    size={20}
+                    strokeWidth={1.5}
+                    className={disabled ? 'icon-muted' : 'icon-primary'}
+                  />
                 </Button>
               </li>
             ))}
