@@ -10,28 +10,21 @@ const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
-    path: '/duzeltici',
-    element: (
-      <AppLayout>
-        <Duzeltici />
-      </AppLayout>
-    ),
-  },
-  {
-    path: '/sekillendirici',
-    element: (
-      <AppLayout>
-        <Sekillendirici />
-      </AppLayout>
-    ),
-  },
-  {
-    path: '/ozetleyici',
-    element: (
-      <AppLayout>
-        <Ozetleyici />
-      </AppLayout>
-    ),
+    element: <AppLayout />,
+    children: [
+      {
+        path: '/duzeltici',
+        element: <Duzeltici />,
+      },
+      {
+        path: '/sekillendirici',
+        element: <Sekillendirici />,
+      },
+      {
+        path: '/ozetleyici',
+        element: <Ozetleyici />,
+      },
+    ],
   },
 ]);
 
