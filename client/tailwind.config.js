@@ -75,6 +75,7 @@ export default {
       secondary: 'hsl(var(--color-border-secondary))',
       focus: 'hsl(var(--color-border-focus))',
       brand: 'hsl(var(--color-border-brand))',
+      'bg-fill-brand': 'hsl(var(--color-bg-fill-brand))',
       success: 'hsl(var(--color-border-success))',
       critical: 'hsl(var(--color-border-critical))',
     },
