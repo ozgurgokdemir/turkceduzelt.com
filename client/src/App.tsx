@@ -1,9 +1,9 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { AppLayout } from '@/components/layout';
 import { EditorProvider } from '@/features/editor';
 import { SuggestionsProvider, Duzeltici } from '@/features/suggestions';
-import { AppLayout } from '@/components/layout';
-import { Sekillendirici } from '@/features/paraphraser';
+import { ParaphraserProvider, Sekillendirici } from '@/features/paraphraser';
 import { Ozetleyici } from '@/features/summarizer';
 
 const queryClient = new QueryClient();
@@ -33,7 +33,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <EditorProvider>
         <SuggestionsProvider>
-          <RouterProvider router={router} />
+          <ParaphraserProvider>
+            <RouterProvider router={router} />
+          </ParaphraserProvider>
         </SuggestionsProvider>
       </EditorProvider>
     </QueryClientProvider>

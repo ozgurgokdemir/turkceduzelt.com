@@ -1,6 +1,11 @@
-async function postParaphraser(text: string) {
+type PostParaphraserProps = {
+  text: string;
+  wording: string;
+};
+
+async function postParaphraser({ text, wording }: PostParaphraserProps) {
   const response = await fetch(
-    'https://localhost:7256/api/paraphraser?value=2',
+    `https://localhost:7256/api/paraphraser?wording=${wording}`,
     {
       method: 'POST',
       body: JSON.stringify(text),

@@ -14,10 +14,10 @@ import { cx } from 'class-variance-authority';
 function Sekillendirici() {
   const { text } = useEditor();
 
-  const { document, mutation } = useParaphraser();
+  const { result, wording, mutation } = useParaphraser();
 
   function handleParaphrase() {
-    mutation.mutate(text);
+    mutation.mutate({ text, wording });
   }
 
   return (
@@ -113,7 +113,7 @@ function Sekillendirici() {
           variant="body-md"
           className={mutation.isPending ? 'animate-pulse' : undefined}
         >
-          {!document && mutation.isPending ? text : document}
+          {!result && mutation.isPending ? text : result}
         </Typography>
       </ParaphraserDocument>
     </main>

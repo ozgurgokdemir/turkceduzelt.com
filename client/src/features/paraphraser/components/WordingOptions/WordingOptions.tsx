@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { Root, List, Trigger } from '@radix-ui/react-tabs';
 import { Typography, UnderlineList } from '@/components/ui';
+import { useParaphraser } from '@/features/paraphraser';
 
 type WordingOptionsProps = React.ComponentPropsWithoutRef<typeof Root>;
 
 function WordingOptions(props: WordingOptionsProps) {
-  const [active, setActive] = React.useState('neutral');
+  const { wording, setWording } = useParaphraser();
 
   return (
-    <Root value={active} onValueChange={setActive} {...props}>
+    <Root value={wording} onValueChange={setWording} {...props}>
       <Typography variant="body-sm" asChild>
-        <UnderlineList active={active} asChild>
+        <UnderlineList active={wording} asChild>
           <List className="flex h-full items-center gap-1">
             <UnderlineList.Item value="formal" asChild>
               <Trigger
