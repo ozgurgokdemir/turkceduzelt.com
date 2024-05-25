@@ -1,4 +1,5 @@
 import '@fontsource-variable/inter';
+import '@fontsource-variable/raleway';
 import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';

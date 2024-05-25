@@ -11,6 +11,9 @@ importers:
       '@fontsource-variable/inter':
         specifier: ^5.0.17
         version: 5.0.17
+      '@fontsource-variable/raleway':
+        specifier: ^5.0.20
+        version: 5.0.20
       '@radix-ui/react-avatar':
         specifier: ^1.0.4
         version: 1.0.4(@types/react-dom@18.2.19)(@types/react@18.2.60)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -1123,6 +1126,9 @@ packages:
 
   '@fontsource-variable/inter@5.0.17':
     resolution: {integrity: sha512-sa80nNnqF8kzhBvqusWiL9vlPMVpdmOwMmDBup46Jggsr1VBqo+YuzwB36Ls+X6uHJtb8Yv3ALBHL/zGmT862A==}
+
+  '@fontsource-variable/raleway@5.0.20':
+    resolution: {integrity: sha512-KXXL81z1GexSxIGD78DnuYGPixRGrUTP0F5uzLIB+0ugPYEv1UW+s8d/NtsCAjYR1pfuN0gXNBAzwwFxMqLZbA==}
 
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -6231,6 +6237,8 @@ snapshots:
   '@floating-ui/utils@0.2.1': {}
 
   '@fontsource-variable/inter@5.0.17': {}
+
+  '@fontsource-variable/raleway@5.0.20': {}
 
   '@humanwhocodes/config-array@0.11.14':
     dependencies:

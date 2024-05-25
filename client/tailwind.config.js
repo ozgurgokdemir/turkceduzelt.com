@@ -68,6 +68,7 @@ export default {
         hover: 'hsl(var(--color-text-critical-hover))',
         'on-bg-fill': 'hsl(var(--color-text-critical-on-bg-fill))',
       },
+      transparent: 'transparent',
     },
     borderColor: {
       primary: 'hsl(var(--color-border))',
@@ -90,6 +91,7 @@ export default {
     },
     fontFamily: {
       sans: ['var(--font-family-sans)', ...defaultTheme.fontFamily.sans],
+      brand: ['var(--font-family-brand)', ...defaultTheme.fontFamily.sans],
     },
     fontWeight: {
       extralight: 'var(--font-weight-extralight)',
