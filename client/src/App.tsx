@@ -4,7 +4,7 @@ import { AppLayout } from '@/components/layout';
 import { EditorProvider } from '@/features/editor';
 import { SuggestionsProvider, Duzeltici } from '@/features/suggestions';
 import { ParaphraserProvider, Sekillendirici } from '@/features/paraphraser';
-import { Ozetleyici } from '@/features/summarizer';
+import { SummarizerProvider, Ozetleyici } from '@/features/summarizer';
 
 const queryClient = new QueryClient();
 
@@ -34,7 +34,9 @@ function App() {
       <EditorProvider>
         <SuggestionsProvider>
           <ParaphraserProvider>
-            <RouterProvider router={router} />
+            <SummarizerProvider>
+              <RouterProvider router={router} />
+            </SummarizerProvider>
           </ParaphraserProvider>
         </SuggestionsProvider>
       </EditorProvider>
