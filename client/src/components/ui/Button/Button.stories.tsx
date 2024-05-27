@@ -22,7 +22,7 @@ const meta = {
   },
   render: (args) => (
     <div className="flex items-center gap-3">
-      <Button size="default" {...args}>
+      <Button size="md" {...args}>
         <Icon
           icon={Copy}
           variant={args.tone === 'neutral' ? 'secondary' : args.tone}

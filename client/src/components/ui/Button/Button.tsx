@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { Typography } from '@/components/ui';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-lg ring-offset-bg-surface transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 disabled:pointer-events-none',
+  'inline-flex items-center justify-center gap-3 whitespace-nowrap ring-offset-bg-surface transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 disabled:pointer-events-none',
   {
     variants: {
       variant: {
@@ -19,8 +19,13 @@ const buttonVariants = cva(
         critical: '',
       },
       size: {
-        default: 'h-9 px-4',
+        md: 'h-9 px-4',
+        lg: 'h-12 px-6',
         icon: 'h-9 w-9',
+      },
+      radius: {
+        default: 'rounded-lg',
+        full: 'rounded-full',
       },
     },
     compoundVariants: [
@@ -94,7 +99,8 @@ const buttonVariants = cva(
     defaultVariants: {
       variant: 'outline',
       tone: 'neutral',
-      size: 'default',
+      size: 'md',
+      radius: 'default',
     },
   },
 );
@@ -105,13 +111,16 @@ type ButtonProps = React.ComponentPropsWithRef<'button'> &
   };
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ asChild = false, variant, tone, size, className, ...props }, ref) => {
+  (
+    { asChild = false, variant, tone, size, radius, className, ...props },
+    ref,
+  ) => {
     const Component = asChild ? Slot : 'button';
 
     return (
-      <Typography variant="body-sm" asChild>
+      <Typography variant={size === 'md' ? 'body-sm' : 'body-md'} asChild>
         <Component
-          className={buttonVariants({ variant, tone, size, className })}
+          className={buttonVariants({ variant, tone, size, radius, className })}
           ref={ref}
           {...props}
         />
