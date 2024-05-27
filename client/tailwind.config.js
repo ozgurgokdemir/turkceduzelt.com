@@ -44,6 +44,7 @@ export default {
         success: 'hsl(var(--color-border-success))',
         critical: 'hsl(var(--color-border-critical))',
       },
+      transparent: 'transparent',
     },
     textColor: {
       primary: 'hsl(var(--color-text))',

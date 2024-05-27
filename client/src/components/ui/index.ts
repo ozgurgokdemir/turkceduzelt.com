@@ -8,3 +8,4 @@ export { default as Icon } from './Icon';
 export { default as Skeleton } from './Skeleton';
 export { default as Spinner } from './Spinner';
 export { default as UnderlineList } from './UnderlineList';
+export { default as Input } from './Input';
