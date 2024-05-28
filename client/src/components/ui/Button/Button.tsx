@@ -96,12 +96,6 @@ const buttonVariants = cva(
         className: 'text-critical hover:bg-surface-critical',
       },
     ],
-    defaultVariants: {
-      variant: 'outline',
-      tone: 'neutral',
-      size: 'md',
-      radius: 'default',
-    },
   },
 );
 
@@ -112,7 +106,15 @@ type ButtonProps = React.ComponentPropsWithRef<'button'> &
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { asChild = false, variant, tone, size, radius, className, ...props },
+    {
+      variant = 'outline',
+      tone = 'neutral',
+      size = 'md',
+      radius = 'default',
+      asChild = false,
+      className,
+      ...props
+    },
     ref,
   ) => {
     const Component = asChild ? Slot : 'button';
