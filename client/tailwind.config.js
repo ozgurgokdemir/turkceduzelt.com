@@ -6,6 +6,9 @@ export default {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     backgroundColor: {
+      inherit: 'inherit',
+      current: 'currentColor',
+      transparent: 'transparent',
       primary: 'hsl(var(--color-bg))',
       surface: {
         DEFAULT: 'hsl(var(--color-bg-surface))',
@@ -44,9 +47,11 @@ export default {
         success: 'hsl(var(--color-border-success))',
         critical: 'hsl(var(--color-border-critical))',
       },
-      transparent: 'transparent',
     },
     textColor: {
+      inherit: 'inherit',
+      current: 'currentColor',
+      transparent: 'transparent',
       primary: 'hsl(var(--color-text))',
       secondary: 'hsl(var(--color-text-secondary))',
       muted: 'hsl(var(--color-text-muted))',
@@ -69,7 +74,6 @@ export default {
         hover: 'hsl(var(--color-text-critical-hover))',
         'on-bg-fill': 'hsl(var(--color-text-critical-on-bg-fill))',
       },
-      transparent: 'transparent',
     },
     borderColor: {
       primary: 'hsl(var(--color-border))',
