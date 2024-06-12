@@ -1,4 +1,4 @@
-import { Button, Form, Input, Typography } from '@/components/ui';
+import { Button, Checkbox, Form, Input, Typography } from '@/components/ui';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginInputSchema, LoginInput } from '@/features/auth';
@@ -10,6 +10,7 @@ function LoginForm() {
     defaultValues: {
       email: '',
       password: '',
+      remember: true,
     },
   });
 
@@ -27,7 +28,7 @@ function LoginForm() {
           control={form.control}
           name="email"
           render={({ field }) => (
-            <Form.Item>
+            <Form.Item className="space-y-2">
               <Form.Label>Email</Form.Label>
               <Form.Control>
                 <Input placeholder="ornek@gmail.com" {...field} />
@@ -40,7 +41,7 @@ function LoginForm() {
           control={form.control}
           name="password"
           render={({ field }) => (
-            <Form.Item>
+            <Form.Item className="space-y-2">
               <div className="flex items-center justify-between">
                 <Form.Label>Şifre</Form.Label>
                 <Typography variant="body-sm" asChild>
@@ -56,6 +57,23 @@ function LoginForm() {
                 <Input placeholder="şifre" {...field} />
               </Form.Control>
               <Form.Message />
+            </Form.Item>
+          )}
+        />
+        <Form.Field
+          control={form.control}
+          name="remember"
+          render={({ field }) => (
+            <Form.Item className="flex items-center gap-2">
+              <Form.Control>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </Form.Control>
+              <Form.Label typography="body-sm" className="text-secondary">
+                Beni hatırla
+              </Form.Label>
             </Form.Item>
           )}
         />
