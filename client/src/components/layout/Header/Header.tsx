@@ -23,7 +23,10 @@ function Header({ className, ...props }: HeaderProps) {
       )}
       {...props}
     >
-      <Logo />
+      <Logo to="/">
+        <Logo.Icon />
+        <Logo.Text />
+      </Logo>
       <UnderlineList active={pathname} asChild>
         <nav className="hidden h-full items-center gap-1 space-x-1 md:flex">
           <UnderlineList.Item value="/duzeltici" asChild>
