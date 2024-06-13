@@ -1,20 +1,18 @@
-import { Button, Icon, Typography } from '@/components/ui';
+import { Button, Icon, Logo } from '@/components/ui';
 import { ArrowLeft } from 'lucide-react';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 function AuthLayout() {
   return (
-    <main className="flex h-screen w-full items-center justify-center">
-      <div className="min-w-96 space-y-12">
+    <main className="relative grid h-screen w-full">
+      <div className="sticky top-0 w-full space-y-12 px-6 py-12 xs:max-w-[27rem] xs:place-self-center">
         <header className="flex items-center gap-3">
-          <Button variant="filled" size="icon" radius="full">
-            <Icon variant="primary" icon={ArrowLeft} />
+          <Button variant="filled" size="icon" radius="full" asChild>
+            <Link to="/">
+              <Icon variant="primary" icon={ArrowLeft} />
+            </Link>
           </Button>
-          <Typography variant="heading-2xl" asChild>
-            <span className="bg-gradient-to-b from-[#71717a] to-[#09090b] bg-clip-text font-brand text-transparent">
-              imlai
-            </span>
-          </Typography>
+          <Logo.Text />
         </header>
         <Outlet />
       </div>
