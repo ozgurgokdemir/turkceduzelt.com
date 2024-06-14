@@ -5,7 +5,7 @@ import { EditorProvider } from '@/features/editor';
 import { SuggestionsProvider, Duzeltici } from '@/features/suggestions';
 import { ParaphraserProvider, Sekillendirici } from '@/features/paraphraser';
 import { SummarizerProvider, Ozetleyici } from '@/features/summarizer';
-import { Giris } from '@/features/auth';
+import { Giris, Kayit } from '@/features/auth';
 
 const queryClient = new QueryClient();
 
@@ -33,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/giris',
         element: <Giris />,
+      },
+      {
+        path: '/kayit',
+        element: <Kayit />,
       },
     ],
   },

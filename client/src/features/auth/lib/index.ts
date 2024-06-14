@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const loginInputSchema = z.object({
+export const registerInputSchema = z.object({
   email: z
     .string()
     .min(1, { message: 'Email alanı boş bırakılamaz' })
@@ -9,6 +9,11 @@ export const loginInputSchema = z.object({
     .string()
     .min(1, { message: 'Şifre alanı boş bırakılamaz' })
     .min(8, { message: 'Şifre en az 8 karakter olmalı' }),
+});
+
+export type RegisterInput = z.infer<typeof registerInputSchema>;
+
+export const loginInputSchema = registerInputSchema.extend({
   remember: z.boolean().optional(),
 });
 
