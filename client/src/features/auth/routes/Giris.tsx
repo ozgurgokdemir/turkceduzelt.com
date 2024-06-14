@@ -1,9 +1,9 @@
+import { Link, Typography } from '@/components/ui';
 import {
   AuthHeader,
   GoogleAuthButton,
   AuthSeperator,
   LoginForm,
-  SwitchAuthLink,
 } from '@/features/auth';
 
 function Giris() {
@@ -16,10 +16,9 @@ function Giris() {
       <GoogleAuthButton />
       <AuthSeperator />
       <LoginForm />
-      <SwitchAuthLink
-        question="Üye değil misin?"
-        link={{ to: '/kayit', text: 'Şimdi kayıt ol' }}
-      />
+      <Typography variant="body-sm" className="text-secondary">
+        Üye değil misin? <Link to="/kayit">Şimdi kayıt ol</Link>
+      </Typography>
     </div>
   );
 }

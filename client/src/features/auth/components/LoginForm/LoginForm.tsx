@@ -1,8 +1,14 @@
-import { Button, Checkbox, Form, Input, Typography } from '@/components/ui';
+import {
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  Link,
+  Typography,
+} from '@/components/ui';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginInputSchema, LoginInput } from '@/features/auth';
-import { Link } from 'react-router-dom';
 
 function LoginForm() {
   const form = useForm<LoginInput>({
@@ -45,12 +51,7 @@ function LoginForm() {
               <div className="flex items-center justify-between">
                 <Form.Label>Şifre</Form.Label>
                 <Typography variant="body-sm" asChild>
-                  <Link
-                    to="/sifre-sifirla"
-                    className="text-brand hover:underline"
-                  >
-                    Şifreni mi unuttun?
-                  </Link>
+                  <Link to="/sifre-sifirlama">Şifreni mi unuttun?</Link>
                 </Typography>
               </div>
               <Form.Control>
