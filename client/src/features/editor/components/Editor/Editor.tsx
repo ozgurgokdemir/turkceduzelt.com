@@ -133,7 +133,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
             <textarea
               value={text}
               onChange={handleChange}
-              className="block aspect-video w-full resize-none p-6 text-primary focus-visible:outline-none"
+              className="block min-h-[24rem] w-full resize-none p-6 text-primary focus-visible:outline-none sm:min-h-[36rem] md:min-h-[30rem] xl:min-h-[36rem]"
             ></textarea>
           </Typography>
           {isEmpty ? (
